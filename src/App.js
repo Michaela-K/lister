@@ -3,6 +3,7 @@ import Header from './components/Header'
 import User from './components/User'
 import AddNewTodo from './components/AddNewTodo'
 import Calendar from './components/Calendar'
+import AddNewProject from './components/AddNewProject'
 import Projects from './components/Projects'
 import Main from './components/Main'
 import Todos from './components/Todos'
@@ -15,6 +16,7 @@ function App() {
         <User />
         <AddNewTodo />
         <Calendar />
+        <AddNewProject/>
         <Projects />
       </Header>
       <Main>

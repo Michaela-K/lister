@@ -4,6 +4,7 @@ import Modal from './Modal'
 const AddNewTodo = () => {
   
   const [showModal, setShowModal] = useState(false)
+  
 
   return (
     <div className='addnewtodo'>

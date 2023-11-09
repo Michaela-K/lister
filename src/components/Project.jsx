@@ -1,5 +1,5 @@
 import React from 'react'
-import RenameProject from './components/RenameProject'
+import RenameProject from './RenameProject'
 
 const Project = () => {
   return (

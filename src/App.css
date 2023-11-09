@@ -58,3 +58,46 @@
   display: flex;
   justify-content: flex-end;
 }
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 99;
+  color: #ebebeb;
+}
+.modal .container {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -25%);
+}
+
+/* AddNewTodo */
+.addnewtodo {
+  border-bottom: 1px solid #ebebeb;
+}
+.addnewtodo .btn {
+  padding: 1rem;
+  width: 100%;
+  height: 70px;
+}
+.addnewtodo .btn button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 3px;
+  font-size: 1rem;
+  background-color: #0080ff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+.addnewtodo .btn button:hover {
+  filter: brightness(1.1);
+  transition: all 300ms ease;
+}

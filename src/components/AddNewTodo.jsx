@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import Modal from './Modal'
+import Modal from './Modal' 
+import TodoForm from './TodoForm' 
 
 const AddNewTodo = () => {
   
@@ -13,7 +14,10 @@ const AddNewTodo = () => {
               + New Todo
           </button>
       </div>
-      <Modal showModal={showModal} setShowModal={setShowModal}/>
+      <Modal showModal={showModal} setShowModal={setShowModal}>
+         <TodoForm setShowModal={setShowModal}/>
+      </Modal>
+      
     </div>
   )
 }

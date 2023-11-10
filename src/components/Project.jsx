@@ -32,6 +32,9 @@ const Project = ({ id, name, numTodos, toggleEdit }) => {
               </div>
             }
         </div>
+        <Modal showModal={showModal} setShowModal={setShowModal}>
+          <RenameProject id={id} name={name} numTodos={numTodos} setShowModal={setShowModal}/>
+        </Modal>
       </div>
     </div>
   );

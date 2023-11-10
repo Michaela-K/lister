@@ -1,9 +1,14 @@
 import React from 'react'
+import { Plus } from 'react-bootstrap-icons'
 
 const AddNewProject = () => {
   return (
-    <div>AddNewProject</div>
+    <div>
+      <span>
+        <Plus size="20"/>
+      </span>
+    </div>
   )
 }
 
-export default AddNewProject
+export default AddNewProject 

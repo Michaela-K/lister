@@ -7,7 +7,6 @@ import Projects from './Projects'
 const SideBar = () => {
   return (
     <div className='sidebar'>
-      SideBar
       <User />
       <AddNewTodo />
       <Calendar />

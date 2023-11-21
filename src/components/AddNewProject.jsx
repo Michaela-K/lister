@@ -3,8 +3,7 @@ import { Plus } from 'react-bootstrap-icons'
 import Modal from './Modal'
 import ProjectForm from './ProjectForm'
 
-const AddNewProject = () => {
-  const [showModal, setShowModal] = useState(false)
+const AddNewProject = ({toggleNewProjectModal, newProjectModalState}) => {
   const [projectName, setProjectName] = useState('')
 
   function handleSubmit(e){
@@ -14,17 +13,17 @@ const AddNewProject = () => {
   return (
     <div className='addNewProject'>
     <div className="add-button">
-        <span onClick={() => setShowModal(true)}>
+        <span onClick={() => toggleNewProjectModal()}>
             <Plus size="20" />
         </span>
     </div>
-    <Modal showModal={showModal} setShowModal={setShowModal}>
+    <Modal modalState={newProjectModalState} toggleModal={toggleNewProjectModal}>
         <ProjectForm
             handleSubmit={handleSubmit}
             heading='New project!'
             value={projectName}
             setValue={setProjectName}
-            setShowModal={setShowModal}
+            toggleNewProjectModal={toggleNewProjectModal}
             confirmButtonText='+ Add Project'
         />
     </Modal>

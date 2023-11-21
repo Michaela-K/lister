@@ -4,15 +4,15 @@ import AddNewTodo from './AddNewTodo'
 import Calendar from './Calendar'
 import Projects from './Projects'
 
-const SideBar = () => {
+const SideBar = ({toggleTodoModal, todoModalState, toggleNewProjectModal, newProjectModalState}) => {
   return (
     <div className='sidebar'>
       <User />
-      <AddNewTodo />
+      <AddNewTodo toggleTodoModal={toggleTodoModal} todoModalState={todoModalState}/>
       <Calendar />
-      <Projects />
+      <Projects toggleNewProjectModal={toggleNewProjectModal} newProjectModalState={newProjectModalState}/>
     </div>
   )
 }
 
-export default SideBar
+export default SideBar;

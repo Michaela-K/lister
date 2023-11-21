@@ -3,8 +3,7 @@ import RenameProject from "./RenameProject";
 import Modal from "./Modal";
 import { Pencil, XCircle } from "react-bootstrap-icons";
 
-const Project = ({ id, name, numTodos, toggleEdit }) => {
-  const [showModal, setShowModal] = useState(false)
+const Project = ({ id, name, numTodos, toggleEdit, toggleNewProjectModal, newProjectModalState}) => {
 
   return (
     <div>
@@ -16,7 +15,7 @@ const Project = ({ id, name, numTodos, toggleEdit }) => {
           {/* if true, show the delete and edit buttons */}
             { toggleEdit ?
               <div className="edit-delete">
-                <span className="edit" onClick={() => setShowModal(true)}>
+                <span className="edit" onClick={() => toggleNewProjectModal()}>
                   <Pencil size="13" />
                 </span>
                 <span className="delete" >
@@ -32,8 +31,8 @@ const Project = ({ id, name, numTodos, toggleEdit }) => {
               </div>
             }
         </div>
-        <Modal showModal={showModal} setShowModal={setShowModal}>
-          <RenameProject id={id} name={name} numTodos={numTodos} setShowModal={setShowModal}/>
+        <Modal newProjectModalState={newProjectModalState} toggleNewProjectModal={toggleNewProjectModal}>
+          <RenameProject id={id} name={name} numTodos={numTodos} toggleNewProjectModal={toggleNewProjectModal}/>
         </Modal>
       </div>
     </div>

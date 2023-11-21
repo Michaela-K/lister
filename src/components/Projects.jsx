@@ -1,10 +1,9 @@
 import React, {useContext, useState} from 'react'
 import Project from "./Project";
 import AddNewProject from "./AddNewProject";
-import RenameProject from "./RenameProject";
 import { CaretUp, Palette, PencilFill } from 'react-bootstrap-icons';
 
-const Projects = () => {
+const Projects = ({toggleNewProjectModal, newProjectModalState}) => {
 
   const [showMenu, setShowMenu] = useState(true);
   const [toggleEdit, setToggleEdit] = useState(false)
@@ -30,7 +29,7 @@ const Projects = () => {
                 <PencilFill size="15" color={pencilColor} />
               </span>
             )}
-            <AddNewProject />
+            <AddNewProject  toggleNewProjectModal={toggleNewProjectModal} newProjectModalState={newProjectModalState}/>
             {/* <animated.span
               className="arrow"
               onClick={() => setShowMenu(!showMenu)}
@@ -51,8 +50,7 @@ const Projects = () => {
         {/* </animated.div> */}
       </div>
       Projects List
-      <Project />
-      <AddNewProject />
+      <Project  toggleNewProjectModal={toggleNewProjectModal} newProjectModalState={newProjectModalState}/>
     </div>
   );
 };

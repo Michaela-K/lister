@@ -3,7 +3,7 @@ import {Bell, CalendarDay, Clock, Palette, X} from 'react-bootstrap-icons'
 import { LocalizationProvider, DatePicker, TimePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 
-const TodoForm = ({setShowModal}) => {
+const TodoForm = ({toggleModal}) => {
   const [text, setText] = useState('');
   const [day, setDay] = useState(new Date())
   const [time, setTime] = useState(new Date())
@@ -66,7 +66,7 @@ const TodoForm = ({setShowModal}) => {
           </div>
         </div>
 
-        <div className="cancel" onClick={() => setShowModal(false)}>
+        <div className="cancel" onClick={() => toggleModal()}>
           <X size='40'/>
         </div>
         <div className="confirm">

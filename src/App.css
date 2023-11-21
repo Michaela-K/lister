@@ -27,7 +27,7 @@
   width: 100%;
   height: 100%;
   background-color: #003fe0;
-  background-image: url("https://images.unsplash.com/photo-1601314167099-232775b3d6fd?q=80&w=902&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-image: url("https://images.pexels.com/photos/3022415/pexels-photo-3022415.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
@@ -362,4 +362,76 @@
 }
 .projectForm button:hover {
   filter: brightness(1.1);
+}
+
+/* Todos */
+.todos {
+  width: 450px;
+  height: 80%;
+  background-color: white;
+
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+
+  border-radius: 4px;
+  opacity: 0.9;
+
+  padding: 0 0.5rem 0.5rem 0.5rem;
+
+  overflow-y: auto;
+}
+.todos .selected-project {
+  margin: 1rem 0;
+  text-transform: capitalize;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #eeeeee;
+}
+.todos .to_dos {
+  overflow-y: auto;
+}
+
+/* Todo */
+.todo {
+  padding: 0.5rem 1rem;
+}
+.todo .todo-container {
+  display: flex;
+  align-items: center;
+}
+.todo .todo-container .check-todo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 15px;
+}
+.todo .todo-container span {
+  cursor: pointer;
+}
+.todo .todo-container .text {
+  position: relative;
+  flex: 1;
+  margin: 0 10px;
+  cursor: pointer;
+}
+.todo .todo-container .text span {
+  font-size: 0.8rem;
+  color: #bebebe;
+}
+.todo .todo-container .text .line {
+  height: 1px;
+  background: #bebebe;
+  position: absolute;
+  top: 25%;
+  width: 0;
+  transition: width 250ms ease-in-out;
+}
+.todo .todo-container .text .line-through {
+  width: 100%;
+}
+.todo .todo-container .add-to-next-day {
+  margin-right: 10px;
 }

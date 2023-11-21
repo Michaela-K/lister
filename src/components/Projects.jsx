@@ -50,7 +50,7 @@ const Projects = ({toggleNewProjectModal, newProjectModalState}) => {
         {/* </animated.div> */}
       </div>
       Projects List
-      <Project  toggleNewProjectModal={toggleNewProjectModal} newProjectModalState={newProjectModalState}/>
+      <Project toggleNewProjectModal={toggleNewProjectModal} newProjectModalState={newProjectModalState}/>
     </div>
   );
 };

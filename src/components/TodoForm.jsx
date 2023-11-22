@@ -1,20 +1,16 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {Bell, CalendarDay, Clock, Palette, X} from 'react-bootstrap-icons'
 import { LocalizationProvider, DatePicker, TimePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 
-const TodoForm = ({toggleModal}) => {
-  const [text, setText] = useState('');
-  const [day, setDay] = useState(new Date())
-  const [time, setTime] = useState(new Date())
-
+const TodoForm = ({handleSubmit, heading=false, text, setText, day, setDay, time, setTime, projects, showButtons = false, toggleModal=false}) => {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <div className='todoform'>
+      <div onSubmit={handleSubmit} className='todoform'>
         <form>
           <div className="text">
-            <h3>Add new To do!</h3>
+            { heading && <h3>{heading}</h3>}
             <input 
             type="text"
             value={text}
@@ -57,21 +53,28 @@ const TodoForm = ({toggleModal}) => {
               <p>Choose a project</p>    
           </div>
           <div className="projects">
-            <div className="project active">
+            {/* <div className="project active">
               personal
             </div>
             <div className="project">
               work
-            </div>
+            </div> */}
+            {projects.map( project => 
+              <div className="project" key={project.id}>
+                {project.name}
+              </div> )}
           </div>
         </div>
-
-        <div className="cancel" onClick={() => toggleModal()}>
-          <X size='40'/>
+        { showButtons &&
+        <div>
+          <div className="cancel" onClick={() => toggleModal()}>
+            <X size='40'/>
+          </div>
+          <div className="confirm">
+            <button> + Add to do</button>
+          </div>
         </div>
-        <div className="confirm">
-          <button> + Add to do</button>
-        </div>
+        }
       </div>
   </LocalizationProvider>
   )

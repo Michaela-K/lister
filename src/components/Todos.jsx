@@ -3,7 +3,7 @@ import Todo from './Todo'
 import Next7Days from './Next7Days'
 
 const Todos = () => {
-  const selectedProject = "Next 7 days";
+  const selectedProject = "Next 8 days";
 
   const todos = [
     {
@@ -13,7 +13,7 @@ const Todos = () => {
       date: "06/03/2023",
       day: "6",
       checked: false,
-      color: "#000000",
+      color: "lightpink",
       project: "personal"
     },
     {
@@ -23,7 +23,7 @@ const Todos = () => {
       date: "11/19/2023",
       day: "1",
       checked: true,
-      color: "#00ff00",
+      color: "lightcoral",
       project: "work"
     }
   ];

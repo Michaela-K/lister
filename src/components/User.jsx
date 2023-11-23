@@ -7,7 +7,7 @@ const User = () => {
         <img alt="logo" />
       </div>
       <div className='info'>
-        <p>Code Explained</p>
+        <p>To Do</p>
           <a href="#">Logout!</a>
       </div>
     </div>

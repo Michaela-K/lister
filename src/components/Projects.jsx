@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useState} from 'react'
 import Project from "./Project";
 import AddNewProject from "./AddNewProject";
 import { CaretUp, Palette, PencilFill } from 'react-bootstrap-icons';

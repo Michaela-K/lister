@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import RenameProject from "./RenameProject";
 import Modal from "./Modal";
 import { Pencil, XCircle } from "react-bootstrap-icons";
+import { TodoContext } from '../context';
 
 const Project = ({ id, name, numTodos, toggleEdit, toggleNewProjectModal, newProjectModalState}) => {
+   //CONTEXT
+   const {setSelectedProject} = useContext(TodoContext);
 
   return (
     <div>
       <div className="project">
-        <div className="name">
+        <div className="name" onClick={() => setSelectedProject(name)}>
           {name}
         </div>
         <div className="btns">

@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import TodoForm from "./TodoForm";
+import { TodoContext } from '../context'
 
 const EditTodo = ({todo}) => {
+  // CONTEXT
+  const { selectedProject } = useContext(TodoContext)
+
   const [text, setText] = useState("");
   const [day, setDay] = useState(new Date());
   const [time, setTime] = useState(new Date());
+  const [todoProject, setTodoProject] = useState(selectedProject)
 
   const projects = [
     { id: 1, name: "personal", numTodos: 0 },
@@ -28,6 +33,8 @@ const EditTodo = ({todo}) => {
               setDay={setDay}
               time={time}
               setTime={setTime}
+              todoProject={todoProject}
+              setTodoProject={setTodoProject}
               projects={projects}
             />
           </div>

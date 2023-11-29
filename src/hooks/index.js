@@ -24,31 +24,29 @@ export const useTodos = () => {
 };
 
 
-// export function useProjects(todos){
-//     const [projects, setProjects] = useState([])
+export function useProjects(todos){
+    const [projects, setProjects] = useState([])
 
-//     function calculateNumOfTodos(projectName, todos){
-//         //filter returns an array where the condition is true
-//       return todos.filter(todo => todo.projectName === projectName).length
-//     }
+    function calculateNumOfTodos(projectName, todos){
+        //filter returns an array where the condition is true
+      return todos.filter(todo => todo.projectName === projectName).length
+    }
 
-//     useEffect(() => {
-//         let unsubscribe = db
-//         .collection('projects')
-//         .onSnapshot( snapshot => {
-//             const data = snapshot.docs.map( doc => {
-//               const projectName = doc.data().name;
-//                 return {
-//                     id : doc.id,
-//                     name : projectName,
-//                     numOfTodos: calculateNumOfTodos(projectName, todos)
-//                 }
-//             })
-//             setProjects(data)
-//         })
+    useEffect(() => {
+        const unsubscribe = onSnapshot(collection(db, 'projects'), (snapshot) => {
+            const data = snapshot.docs.map((doc) => {
+                const projectName = doc.data().name;
+                return {
+                    id: doc.id,
+                    name: projectName,
+                    numOfTodos: calculateNumOfTodos(projectName, todos),
+                };
+            });
+            setProjects(data);
+        });
 
-//         return () => {unsubscribe()}
-//     }, [])
+        return () => {unsubscribe()}
+    }, [])
 
-//     return projects
-// }
+    return projects
+}

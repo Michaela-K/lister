@@ -1,25 +1,27 @@
 // import moment from 'moment'
 import { useState, useEffect } from 'react'
 import { db } from '../firebase'
-import { onSnapshot, collection } from 'firebase/firestore';
+import { onSnapshot, collection, query } from 'firebase/firestore';
 
 
 export const useTodos = () => {
     const [todos, setTodos] = useState([]);
-
+    
     useEffect(() => {
-        const unsubscribe = onSnapshot(collection(db, 'todos'), (snapshot) => {
+        const q = query(collection(db,'todos'))
+        const unsubscribe = onSnapshot(q, (snapshot) => {
             const data = snapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data(),
             }));
             setTodos(data);
         });
-
+        
         return () => unsubscribe(); // Cleanup
-
+        
     }, [db]);
-
+    
+    // console.log(todos.filter(todo => todo.projectName === "personal").length)
     return todos;
 };
 
@@ -46,7 +48,7 @@ export function useProjects(todos){
         });
 
         return () => {unsubscribe()}
-    }, [])
+    }, [todos])
 
     return projects
 }

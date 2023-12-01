@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import Project from "./Project";
 import AddNewProject from "./AddNewProject";
 import { CaretUp, Palette, PencilFill } from 'react-bootstrap-icons';
+import { TodoContext } from '../context';
 
 const Projects = ({toggleNewProjectModal, newProjectModalState}) => {
 
@@ -9,11 +10,8 @@ const Projects = ({toggleNewProjectModal, newProjectModalState}) => {
   const [toggleEdit, setToggleEdit] = useState(false)
   const pencilColor = toggleEdit ? "#1EC94C" : "#000000"
 
-  const projects =[
-    {id: 1, name: "personal", numTodos: 0},
-    {id: 2, name: "work", numTodos: 1},
-    {id: 3, name: "other", numTodos: 2},
-  ]
+  const {projects} = useContext(TodoContext)
+  // console.log(projects)
   
   return (
     <div>
@@ -43,8 +41,9 @@ const Projects = ({toggleNewProjectModal, newProjectModalState}) => {
         </div>
         {/* <animated.div style={menuAnimation} className="items"> */}
         <div className="items">
-          {projects.map((project) => (
-            <Project id={project.id} name={project.name} numTodos={project.numTodos} key={project.id} toggleEdit={toggleEdit} />
+          {projects.map((project) => ( 
+            // console.log(project.numOfTodos)
+            <Project id={project.id} name={project.name} numTodos={project.numOfTodos} key={project.id} toggleEdit={toggleEdit} />
           ))}
         </div>
         {/* </animated.div> */}

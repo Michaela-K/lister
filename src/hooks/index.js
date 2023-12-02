@@ -6,6 +6,7 @@ import { onSnapshot, collection, query } from 'firebase/firestore';
 
 export const useTodos = () => {
     const [todos, setTodos] = useState([]);
+    console.log("useTodos effect called")
     
     useEffect(() => {
         const q = query(collection(db,'todos'))
@@ -14,6 +15,7 @@ export const useTodos = () => {
                 id: doc.id,
                 ...doc.data(),
             }));
+            console.log("Subscribed")
             setTodos(data);
         });
         

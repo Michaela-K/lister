@@ -20,8 +20,8 @@ const TodoForm = ({
 }) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <div onSubmit={handleSubmit} className="todoform">
-        <form>
+      <div className="todoform">
+        <form onSubmit={(e) =>handleSubmit(e)} > 
           <div className="text">
             {heading && <h3>{heading}</h3>}
             <input
@@ -36,7 +36,6 @@ const TodoForm = ({
             <Bell />
             <p>Remind Me!</p>
           </div>
-        </form>
 
         <div className="pick-day">
           <div className="title">
@@ -87,10 +86,11 @@ const TodoForm = ({
               <X size="40" />
             </div>
             <div className="confirm">
-              <button> + Add to do</button>
+              <button type="submit"> + Add to do</button>
             </div>
           </div>
         )}
+      </form>
       </div>
     </LocalizationProvider>
   );

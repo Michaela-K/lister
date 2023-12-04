@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { CalendarDate, CaretUp } from "react-bootstrap-icons";
 import { TodoContext } from "../context";
+import {calendarItems} from "../constants"
 
 const Calendar = () => {
-  const calendarItems = ["today", "next 7 days", "all days"];
 
   const { setSelectedProject } = useContext(TodoContext);
 

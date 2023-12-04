@@ -13,7 +13,7 @@ const Todos = () => {
       </div>
       <div className="to_dos">
         {
-          selectedProject === "Next 7 days" ?
+          selectedProject === "Next 7 Days" ?
           <Next7Days todos={todos} />
           :
           todos.map( todo => 

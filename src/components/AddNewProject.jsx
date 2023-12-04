@@ -30,7 +30,7 @@ const AddNewProject = ({toggleNewProjectModal, newProjectModalState}) => {
         console.error('Error checking project existence:', error);
       });
 
-      toggleNewProjectModal(false);
+    toggleNewProjectModal(false);
     setProjectName('');
     }
   }

@@ -16,7 +16,6 @@ const Next7Days = ({todos}) => {
       })
 
       const today = parseInt(moment().format('d'))  //parseInt used to make it into a number
-      console.log(today)
       //arrange it by todays date
       const arrangeDays = sortedTodosByDay.slice(today).concat(sortedTodosByDay.slice(0, today))
 

@@ -4,7 +4,7 @@ import TodoForm from "./TodoForm";
 import { TodoContext } from "../context";
 import {calendarItems} from '../constants'
 import { db } from "../firebase";
-import { addDoc, collection, query } from "firebase/firestore";
+import { addDoc, collection, doc } from "firebase/firestore";
 import moment from "moment";
 import randomcolor from "randomcolor";
 
@@ -23,7 +23,9 @@ const AddNewTodo = ({ toggleTodoModal, todoModalState }) => {
     if (text && !calendarItems.includes(todoProject)) {
       console.log("adding todo")
       //if there is text and the project ! = next7days, today etc ....
-      addDoc(collection(db, "todos"), {
+
+    const todosCollectionRef = collection(db, 'todos'); // Reference to the 'todos' collection
+      addDoc(todosCollectionRef, {
         text: text,
         date: moment(day).format("MM/DD/YYYY"),
         day: moment(day).format("d"),
@@ -31,7 +33,16 @@ const AddNewTodo = ({ toggleTodoModal, todoModalState }) => {
         checked: false,
         color: randomcolor({ luminosity: "dark" }),
         projectName: todoProject,
+      })
+      .then(() => {
+        // Handle success if needed
+        console.log("Todo added successfully");
+      })
+      .catch((error) => {
+        // Handle error if needed
+        console.error("Error adding todo:", error);
       });
+
       //reset
       toggleTodoModal(false);
       setText("");

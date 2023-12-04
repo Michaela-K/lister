@@ -43,7 +43,7 @@ const Projects = ({toggleNewProjectModal, newProjectModalState}) => {
         <div className="items">
           {projects.map((project) => ( 
             // console.log(project.numOfTodos)
-            <Project id={project.id} name={project.name} numTodos={project.numOfTodos} key={project.id} toggleEdit={toggleEdit} />
+            <Project id={project.id} name={project.name} numTodos={project.numOfTodos} key={project.id} toggleEdit={toggleEdit} project={project} />
           ))}
         </div>
         {/* </animated.div> */}

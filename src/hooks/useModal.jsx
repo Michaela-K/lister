@@ -4,6 +4,7 @@ import React, {useReducer } from "react";
 export const ACTIONS = {
   TOGGLE_TODO_MODAL: "TOGGLE_TODO_MODAL",
   TOGGLE_NEW_PROJECT_MODAL: "TOGGLE_NEW_PROJECT_MODAL",
+  TOGGLE_EDIT_PROJECT_MODAL: "TOGGLE_EDIT_PROJECT_MODAL",
 };
 
 const reducer = (state, action) => {
@@ -18,6 +19,11 @@ const reducer = (state, action) => {
         ...state,
         newProjectModalState: !state.newProjectModalState,
       };
+    case "TOGGLE_EDIT_PROJECT_MODAL":
+      return {
+        ...state,
+        editProjectModalState: !state.editProjectModalState,
+      };
     default:
       return state;
   }
@@ -26,7 +32,8 @@ const reducer = (state, action) => {
 export default function useApplicationData() {
   const initialStates = {
     todoModalState: false,
-    newProjectModalState: false
+    newProjectModalState: false,
+    editProjectModalState: false
   };
   const [state, dispatch] = useReducer(reducer, initialStates);
 
@@ -36,12 +43,17 @@ export default function useApplicationData() {
   const toggleNewProjectModal = () => {
     dispatch({ type: ACTIONS.TOGGLE_NEW_PROJECT_MODAL });
   };
+  const toggleEditProjectModal = () => {
+    dispatch({ type: ACTIONS.TOGGLE_EDIT_PROJECT_MODAL });
+  };
 
     
   return {
     toggleTodoModal,
     todoModalState: state.todoModalState,
     toggleNewProjectModal,
-    newProjectModalState: state.newProjectModalState
+    newProjectModalState: state.newProjectModalState,
+    toggleEditProjectModal,
+    editProjectModalState: state.editProjectModalState
   };
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProjectForm = ({handleSubmit, heading, value, setValue, toggleNewProjectModal, confirmButtonText}) => {
+const ProjectForm = ({handleSubmit, heading, value, setValue, toggleModal, confirmButtonText}) => {
   return (
     <form onSubmit={handleSubmit} className="projectForm">
       <h3>{heading}</h3>
@@ -14,7 +14,7 @@ const ProjectForm = ({handleSubmit, heading, value, setValue, toggleNewProjectMo
       <button
         className="cancel"
         role="button" // this stops the button from submitting
-        onClick={() => toggleNewProjectModal()}
+        onClick={() => toggleModal()}
       >
         cancel
       </button>

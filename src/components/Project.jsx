@@ -6,7 +6,7 @@ import { TodoContext } from '../context';
 import { collection, deleteDoc, doc, getDocs, query, where } from "@firebase/firestore";
 import { db } from "../firebase";
 
-const Project = ({ id, name, numTodos, toggleEdit, toggleNewProjectModal, newProjectModalState, project}) => {
+const Project = ({project, toggleEdit, toggleEditProjectModal, editProjectModalState}) => {
    //CONTEXT
    const {defaultProject, selectedProject, setSelectedProject} = useContext(TodoContext);
 
@@ -45,31 +45,31 @@ const Project = ({ id, name, numTodos, toggleEdit, toggleNewProjectModal, newPro
   return (
     <div>
       <div className="project">
-        <div className="name" onClick={() => setSelectedProject(name)}>
-          {name}
+        <div className="name" onClick={() => setSelectedProject(project.name)}>
+          {project.name}
         </div>
         <div className="btns">
           {/* if true, show the delete and edit buttons */}
             { toggleEdit ?
               <div className="edit-delete">
-                <span className="edit" onClick={() => toggleNewProjectModal()}>
+                <span className="edit" onClick={() => {toggleEditProjectModal(); setSelectedProject(project.name); console.log("Project name and ",project.name, selectedProject);}}>
                   <Pencil size="13" />
                 </span>
-                <span className="delete" onClick={ () => deleteProject(project)}>
+                <span className="delete" onClick={() => deleteProject(project)}>
                   <XCircle size="13" />
                 </span>
               </div>
              : 
-             numTodos === 0 ?  // Show the number of To do's only if its not zero. If zero return false/empty string else show
+             project.numTodos === 0 ?  // Show the number of To do's only if its not zero. If zero return false/empty string else show
                ""
              : 
               <div className="total-todos">
-                {numTodos}
+                {project.numTodos}
               </div>
             }
         </div>
-        <Modal newProjectModalState={newProjectModalState} toggleNewProjectModal={toggleNewProjectModal}>
-          <RenameProject id={id} name={name} numTodos={numTodos} toggleNewProjectModal={toggleNewProjectModal}/>
+        <Modal modalState={editProjectModalState} toggleModal={toggleEditProjectModal}>
+          <RenameProject toggleEditProjectModal={toggleEditProjectModal} project={project} selectedProject={selectedProject} />
         </Modal>
       </div>
     </div>

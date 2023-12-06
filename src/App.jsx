@@ -9,11 +9,13 @@ function App() {
     toggleTodoModal, 
     todoModalState, 
     toggleNewProjectModal, 
-    newProjectModalState} = useModal()
+    newProjectModalState,
+    toggleEditProjectModal,
+    editProjectModalState} = useModal()
 
   return (
     <div className="App">
-      <SideBar toggleTodoModal={toggleTodoModal} todoModalState={todoModalState} toggleNewProjectModal={toggleNewProjectModal} newProjectModalState={newProjectModalState}/>
+      <SideBar toggleTodoModal={toggleTodoModal} todoModalState={todoModalState} toggleNewProjectModal={toggleNewProjectModal} newProjectModalState={newProjectModalState} toggleEditProjectModal={toggleEditProjectModal} editProjectModalState={editProjectModalState}/>
       <Main/>
     </div>
   );

@@ -4,7 +4,7 @@ import AddNewProject from "./AddNewProject";
 import { CaretUp, Palette, PencilFill } from 'react-bootstrap-icons';
 import { TodoContext } from '../context';
 
-const Projects = ({toggleNewProjectModal, newProjectModalState}) => {
+const Projects = ({toggleNewProjectModal, newProjectModalState, toggleEditProjectModal, editProjectModalState}) => {
 
   const [showMenu, setShowMenu] = useState(true);
   const [toggleEdit, setToggleEdit] = useState(false)
@@ -27,7 +27,7 @@ const Projects = ({toggleNewProjectModal, newProjectModalState}) => {
                 <PencilFill size="15" color={pencilColor} />
               </span>
             )}
-            <AddNewProject  toggleNewProjectModal={toggleNewProjectModal} newProjectModalState={newProjectModalState}/>
+            <AddNewProject toggleNewProjectModal={toggleNewProjectModal} newProjectModalState={newProjectModalState}/>
             {/* <animated.span
               className="arrow"
               onClick={() => setShowMenu(!showMenu)}
@@ -43,13 +43,11 @@ const Projects = ({toggleNewProjectModal, newProjectModalState}) => {
         <div className="items">
           {projects.map((project) => ( 
             // console.log(project.numOfTodos)
-            <Project id={project.id} name={project.name} numTodos={project.numOfTodos} key={project.id} toggleEdit={toggleEdit} project={project} />
+            <Project key={project.id} toggleEdit={toggleEdit} project={project} toggleNewProjectModal={toggleNewProjectModal} newProjectModalState={newProjectModalState} toggleEditProjectModal={toggleEditProjectModal} editProjectModalState={editProjectModalState}/>
           ))}
         </div>
         {/* </animated.div> */}
       </div>
-      Projects List
-      <Project toggleNewProjectModal={toggleNewProjectModal} newProjectModalState={newProjectModalState}/>
     </div>
   );
 };

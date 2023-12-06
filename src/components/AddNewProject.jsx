@@ -36,7 +36,7 @@ const AddNewProject = ({toggleNewProjectModal, newProjectModalState}) => {
   }
 
   return (
-    <div className='addNewProject'>
+  <div className='addNewProject'>
     <div className="add-button">
         <span onClick={() => toggleNewProjectModal()}>
             <Plus size="20" />
@@ -48,7 +48,7 @@ const AddNewProject = ({toggleNewProjectModal, newProjectModalState}) => {
             heading='New project!'
             value={projectName}
             setValue={setProjectName}
-            toggleNewProjectModal={toggleNewProjectModal}
+            toggleModal={toggleNewProjectModal}
             confirmButtonText='+ Add Project'
         />
     </Modal>

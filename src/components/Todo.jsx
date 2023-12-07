@@ -6,8 +6,9 @@ import {
   Trash,
 } from "react-bootstrap-icons";
 import { TodoContext } from "../context";
-import { collection, deleteDoc, doc, updateDoc } from "@firebase/firestore";
+import { collection, deleteDoc, doc, updateDoc, addDoc } from "@firebase/firestore";
 import { db } from "../firebase";
+import moment from "moment";
 
 const Todo = ({ todo }) => {
   const [hover, setHover] = useState(false)
@@ -43,6 +44,30 @@ const Todo = ({ todo }) => {
           
   }
 
+  const repeatNextDay = (todo) => {  
+    const nextDayDate = moment(todo.date, 'MM/DD/YYYY').add(1, 'days')//pass string into JS date obj called moment and use the moment add method
+
+    const repeatedTodo = {
+        ...todo,  //old todo info -> color, projectName, text, time
+        //override the remaining data with new data
+        date : nextDayDate.format('MM/DD/YYYY'),
+        day : nextDayDate.format('d'),
+        checked : false
+    }
+    // console.log('1) Repeated Todo ID before delete: ', repeatedTodo.id);
+    delete repeatedTodo.id
+    // console.log('1) Repeated Todo ID after delete: ', repeatedTodo.id);
+
+    addDoc(collection(db, 'todos'), repeatedTodo)
+    .then((data) => {
+        // console.log('2) Repeated to do added with new ID', data.id );
+      })
+    .catch((error) => {
+      console.error('Error checking project existence:', error);
+    });
+  }
+
+
   const handleDelete = (todo) => {
     deleteTodo(todo)
     if(selectedTodo === todo){ 
@@ -75,7 +100,7 @@ const Todo = ({ todo }) => {
           </span>
           <div className={`line ${todo.checked ? "line-through" : ""}`}></div>
         </div>
-        <div className="add-to-next-day">
+        <div className="add-to-next-day" onClick={() => repeatNextDay(todo)}>
           {todo.checked && (
             <span>
               <ArrowClockwise />

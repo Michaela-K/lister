@@ -91,7 +91,7 @@ const Todo = ({ todo }) => {
             </span>
           )}
         </div>
-        <div className="text">
+        <div className="text" onClick={() => setSelectedTodo(todo)}>
           <p style={{ color: todo.checked ? "#bebebe" : "#000000" }}>
             {todo.text}
           </p>

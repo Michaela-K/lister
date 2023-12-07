@@ -1,27 +1,47 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import TodoForm from "./TodoForm";
 import { TodoContext } from '../context'
+import { collection, doc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import moment from "moment";
 
-const EditTodo = ({todo}) => {
+const EditTodo = () => {
   // CONTEXT
-  const { selectedProject } = useContext(TodoContext)
+  const { selectedProject, selectedTodo :todo, projects } = useContext(TodoContext)
 
   const [text, setText] = useState("");
   const [day, setDay] = useState(new Date());
   const [time, setTime] = useState(new Date());
   const [todoProject, setTodoProject] = useState(selectedProject)
 
-  const projects = [
-    { id: 1, name: "personal", numTodos: 0 },
-    { id: 2, name: "work", numTodos: 1 },
-    { id: 3, name: "other", numTodos: 2 },
-  ];
+  useEffect(() => {
+    if(todo){
+      setText(todo.text)
+      setDay(moment(todo.date, 'MM/DD/YYYY').toDate());
+      setTime(moment(todo.time, 'hh:mm A').toDate());
+      setTodoProject(todo.projectName)
+    }
+  }, [todo]) //chnage the state only if the selected todos have changed
+
+  useEffect( () => {
+    if(todo){
+      const docToUpdate = doc(collection(db, "todos"), todo.id)
+        updateDoc(docToUpdate,{
+          text,
+          date : moment(day).format('MM/DD/YYYY'),
+          day : moment(day).format('d'),
+          time : moment(time).format('hh:mm A'),
+          projectName : todoProject
+    })
+  }
+  }, [text, day, time, todoProject])
+
 
   function handleSubmit(e) {}
 
   return (
     <div>
-      {/* {todo && ( */}
+      {todo && (
         <div className="editTodo">
           <div className="header">Edit Todo</div>
           <div className="container">
@@ -39,7 +59,7 @@ const EditTodo = ({todo}) => {
             />
           </div>
         </div>
-      {/* )} */}
+      )}
     </div>
   );
 };

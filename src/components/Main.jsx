@@ -5,7 +5,6 @@ import EditTodo from './EditTodo'
 const Main = () => {
   return (
     <div className='main'>
-      Main
       <Todos />
       <EditTodo />
     </div>

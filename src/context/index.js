@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react'
-import { useTodos, useProjects, useFilterTodos} from '../hooks'
+import { useTodos, useProjects, useFilterTodos, useProjectsWithStats} from '../hooks'
 
 const TodoContext = createContext()
 
@@ -9,9 +9,9 @@ function TodoContextProvider({children}){
     const [selectedTodo, setSelectedTodo] = useState(undefined)
 
     const todos = useTodos()
-    const projects = useProjects(todos)
+    const projects = useProjects()
+    const projectsWithStats = useProjectsWithStats(todos, projects)
     const filteredTodos = useFilterTodos(todos, selectedProject)
-    // const projectsWithStats = useProjectsWithStats(todos, projects)
 
     return (
         <TodoContext.Provider
@@ -21,7 +21,7 @@ function TodoContextProvider({children}){
                     selectedProject,
                     setSelectedProject,
                     todos: filteredTodos,
-                    projects,
+                    projects : projectsWithStats,
                     selectedTodo,
                     setSelectedTodo
                 }

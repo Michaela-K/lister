@@ -60,11 +60,11 @@ const Project = ({project, toggleEdit, toggleEditProjectModal, editProjectModalS
                 </span>
               </div>
              : 
-             project.numTodos === 0 ?  // Show the number of To do's only if its not zero. If zero return false/empty string else show
+             project.numOfTodos === 0 ?  // Show the number of To do's only if its not zero. If zero return false/empty string else show
                ""
              : 
               <div className="total-todos">
-                {project.numTodos}
+                {project.numOfTodos}
               </div>
             }
         </div>

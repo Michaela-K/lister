@@ -6,7 +6,7 @@ import {
   Trash,
 } from "react-bootstrap-icons";
 import { TodoContext } from "../context";
-import { collection, deleteDoc, doc } from "@firebase/firestore";
+import { collection, deleteDoc, doc, updateDoc } from "@firebase/firestore";
 import { db } from "../firebase";
 
 const Todo = ({ todo }) => {
@@ -25,7 +25,21 @@ const Todo = ({ todo }) => {
       })
       .catch((error) => {
         console.error('Error deleting todo:', error);
-      });
+      });  
+  }
+
+  const checkTodo = todo => {
+    const checkTodoDocRef = doc(collection(db, 'todos'), todo.id);
+
+    updateDoc(checkTodoDocRef, {
+      checked: !todo.checked,
+    })
+    .then(() => {
+      console.log("Todo updated successfully");
+    })
+    .catch((error) => {
+      console.error('Error deleting todo:', error);
+    });
           
   }
 
@@ -41,7 +55,7 @@ const Todo = ({ todo }) => {
       <div className="todo-container"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}>
-        <div className="check-todo">
+        <div className="check-todo" onClick={ () => checkTodo(todo) }>
           {todo.checked ? (
             <span className="checked">
               <CheckCircleFill color="#bebebe" />

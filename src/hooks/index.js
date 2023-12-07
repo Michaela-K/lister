@@ -21,39 +21,33 @@ export const useTodos = () => {
         
         return () => unsubscribe(); // Cleanup
         
-    }, [db]);
+    }, []);
     
     // console.log(todos.filter(todo => todo.projectName === "personal").length)
     return todos;
 };
 
 
-export function useProjects(todos){
+export function useProjects(){
     const [projects, setProjects] = useState([])
-
-    function calculateNumOfTodos(projectName, todos){
-        //filter returns an array where the condition is true
-      return todos.filter(todo => todo.projectName === projectName).length
-    }
 
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(db, 'projects'), (snapshot) => {
             const data = snapshot.docs.map((doc) => {
-                const projectName = doc.data().name;
                 return {
                     id: doc.id,
-                    name: projectName,
-                    numOfTodos: calculateNumOfTodos(projectName, todos),
+                    name: doc.data().name
                 };
             });
             setProjects(data);
         });
 
         return () => {unsubscribe()}
-    }, [todos])
+    }, [])
 
     return projects
 }
+
 
 export function useFilterTodos(todos, selectedProject){
     const [filteredTodos, setFilteredTodos] = useState([])
@@ -87,3 +81,59 @@ export function useFilterTodos(todos, selectedProject){
 
     return filteredTodos
 }
+
+
+export function useProjectsWithStats(todos, projects){
+    const [projectsWithStats, setProjectsWithStats] = useState([])
+
+    useEffect( () => {
+        const data = projects.map( project => {
+            return {
+                numOfTodos : todos.filter( todo => todo.projectName === project.name && !todo.checked ).length,
+                ...project  //old properties -> id, name
+            }
+        })
+        
+        setProjectsWithStats(data)
+    }, [todos, projects])  //recalculate the num of todos only if the project has been changed
+
+    return projectsWithStats
+}
+
+
+
+
+
+
+
+
+
+
+
+//WHY WAS THIS CODE MODIFIED ABOVE - the code below is not able to have the correct number of todos next to each project when the user checks it off as completed or vice versa
+// export function useProjects(todos){
+//     const [projects, setProjects] = useState([])
+
+//     function calculateNumOfTodos(projectName, todos){
+//         //filter returns an array where the condition is true
+//       return todos.filter(todo => todo.projectName === projectName).length
+//     }
+
+//     useEffect(() => {
+//         const unsubscribe = onSnapshot(collection(db, 'projects'), (snapshot) => {
+//             const data = snapshot.docs.map((doc) => {
+//                 const projectName = doc.data().name;
+//                 return {
+//                     id: doc.id,
+//                     name: projectName,
+//                     numOfTodos: calculateNumOfTodos(projectName, todos),
+//                 };
+//             });
+//             setProjects(data);
+//         });
+
+//         return () => {unsubscribe()}
+//     }, [todos])
+
+//     return projects
+// }

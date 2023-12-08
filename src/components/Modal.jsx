@@ -1,4 +1,5 @@
 import React, {useRef, useState} from 'react'
+import { useTransition, useSpring, animated } from 'react-spring'
 
 
 // used whenever a modal is needed
@@ -17,12 +18,19 @@ const Modal = ({children, modalState, toggleModal}) => {
     }
   }
 
+   // ANIMATION
+   const modalAnimation = useSpring({
+    opacity : modalState ? 1 : 0,
+    top : modalState ? '35%' : '0%',
+    config : { friction : 15 }
+  })
+
   return (
     modalState && //if false, it wont show
     <div className="modal" ref={modalRef} onClick={(e) => closeModal(e)}>
-      <div className="container">
+      <animated.div style={modalAnimation} className="container">
         {children} {/* Putting "children" here makes it display the children you assigned inside of Modal component on another component file eg. AddNewTodo  */}
-      </div>
+      </animated.div>
     </div>
   )
 }

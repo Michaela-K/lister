@@ -5,6 +5,7 @@ import { Pencil, XCircle } from "react-bootstrap-icons";
 import { TodoContext } from '../context';
 import { collection, deleteDoc, doc, getDocs, query, where } from "@firebase/firestore";
 import { db } from "../firebase";
+import { useTransition, useSpring, animated } from 'react-spring'
 
 const Project = ({project, toggleEdit, toggleEditProjectModal, editProjectModalState}) => {
    //CONTEXT
@@ -42,37 +43,50 @@ const Project = ({project, toggleEdit, toggleEditProjectModal, editProjectModalS
       });
     }
 
+    // ANIMATION
+    const fadeIn = useSpring({
+      from : { marginTop : '-12px', opacity : -10 },
+      to : { marginTop : '0px', opacity : 1}
+    })
+    const btnTransitions = useTransition(toggleEdit, {
+        from : { opacity : 0, right : '-20px' },
+        enter : { opacity : 1, right : '0px' },
+        leave : { opacity : 0, right : '-20px' }
+    })
+
   return (
-    <div>
-      <div className="project">
+    // <div>
+      <animated.div style={fadeIn} className='project'>
         <div className="name" onClick={() => setSelectedProject(project.name)}>
           {project.name}
         </div>
         <div className="btns">
           {/* if true, show the delete and edit buttons */}
-            { toggleEdit ?
-              <div className="edit-delete">
+            { btnTransitions((props, callback) =>  
+            callback ?
+              <animated.div style={props} className="edit-delete">
                 <span className="edit" onClick={() => {toggleEditProjectModal(); setSelectedProject(project.name); console.log("Project name and ",project.name, selectedProject);}}>
                   <Pencil size="13" />
                 </span>
                 <span className="delete" onClick={() => deleteProject(project)}>
                   <XCircle size="13" />
                 </span>
-              </div>
+              </animated.div>
              : 
              project.numOfTodos === 0 ?  // Show the number of To do's only if its not zero. If zero return false/empty string else show
                ""
              : 
-              <div className="total-todos">
+              <animated.div style={props} className="total-todos">
                 {project.numOfTodos}
-              </div>
+              </animated.div>
+            )
             }
         </div>
         <Modal modalState={editProjectModalState} toggleModal={toggleEditProjectModal}>
           <RenameProject toggleEditProjectModal={toggleEditProjectModal} project={project} selectedProject={selectedProject} />
         </Modal>
-      </div>
-    </div>
+      </animated.div>
+    // </div>
   );
 };
 

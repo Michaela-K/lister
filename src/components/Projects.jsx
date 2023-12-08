@@ -3,6 +3,7 @@ import Project from "./Project";
 import AddNewProject from "./AddNewProject";
 import { CaretUp, Palette, PencilFill } from 'react-bootstrap-icons';
 import { TodoContext } from '../context';
+import { useSpring, animated } from 'react-spring'
 
 const Projects = ({toggleNewProjectModal, newProjectModalState, toggleEditProjectModal, editProjectModalState}) => {
 
@@ -12,6 +13,17 @@ const Projects = ({toggleNewProjectModal, newProjectModalState, toggleEditProjec
 
   const {projects} = useContext(TodoContext)
   // console.log(projects)
+
+   // ANIMATION
+  const spin = useSpring({
+    transform : showMenu ? 'rotate(0deg)' : 'rotate(180deg)',
+    config : { friction : 30 }
+  })
+
+  const menuAnimation = useSpring({
+      display : showMenu ? 'block' : 'none',
+      lineHeight : showMenu ? 1.2 : 0
+  })
   
   return (
     <div>
@@ -28,25 +40,25 @@ const Projects = ({toggleNewProjectModal, newProjectModalState, toggleEditProjec
               </span>
             )}
             <AddNewProject toggleNewProjectModal={toggleNewProjectModal} newProjectModalState={newProjectModalState}/>
-            {/* <animated.span
+            <animated.span
               className="arrow"
               onClick={() => setShowMenu(!showMenu)}
               style={spin}
-            > */}
+            >
             <span className='arrow'>
               <CaretUp size="20" />
             </span>
-            {/* </animated.span> */}
+            </animated.span>
           </div>
         </div>
-        {/* <animated.div style={menuAnimation} className="items"> */}
+        <animated.div style={menuAnimation} className="items">
         <div className="items">
           {projects.map((project) => ( 
             // console.log(project.numOfTodos)
             <Project key={project.id} toggleEdit={toggleEdit} project={project} toggleNewProjectModal={toggleNewProjectModal} newProjectModalState={newProjectModalState} toggleEditProjectModal={toggleEditProjectModal} editProjectModalState={editProjectModalState}/>
           ))}
         </div>
-        {/* </animated.div> */}
+        </animated.div>
       </div>
     </div>
   );

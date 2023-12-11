@@ -61,9 +61,12 @@ export const useTodos = () => {
 
 export function useProjects(){
     const [projects, setProjects] = useState([])
+    const user = useLoggedInUser()
 
     useEffect(() => {
-        const unsubscribe = onSnapshot(collection(db, 'projects'), (snapshot) => {
+        if (user) {
+        const q = query((collection(db,'projects')), where('userId', '==', user.uid))
+        const unsubscribe = onSnapshot(q, (snapshot) => {
             const data = snapshot.docs.map((doc) => {
                 return {
                     id: doc.id,
@@ -74,7 +77,10 @@ export function useProjects(){
         });
 
         return () => {unsubscribe()}
-    }, [])
+        } else{
+            setProjects([]);
+        }
+    }, [user])
 
     return projects
 }

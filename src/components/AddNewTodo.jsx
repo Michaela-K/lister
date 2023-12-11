@@ -10,7 +10,7 @@ import randomcolor from "randomcolor";
 
 const AddNewTodo = ({ toggleTodoModal, todoModalState }) => {
   // CONTEXT
-  const { projects, selectedProject } = useContext(TodoContext);
+  const { user, projects, selectedProject } = useContext(TodoContext);
 
   // STATE
   const [text, setText] = useState("");
@@ -33,6 +33,8 @@ const AddNewTodo = ({ toggleTodoModal, todoModalState }) => {
         checked: false,
         color: randomcolor({ luminosity: "dark" }),
         projectName: todoProject,
+        userId: user.uid, // Include the user UID
+        // createdAt: serverTimestamp(), // Use serverTimestamp to get the server's time 
       })
       .then(() => {
         // Handle success if needed

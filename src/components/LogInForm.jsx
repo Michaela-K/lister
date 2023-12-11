@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { X } from "react-bootstrap-icons";
+import { TodoContext } from "../context";
 
-const LogInOutForm = ({ handleSubmit, heading = false, toggleModal = false, email, setEmail, password, setPassword, isLoggedIn }) => {
+const LogInOutForm = ({ handleSubmit, heading = false, toggleModal = false, email, setEmail, password, setPassword }) => {
+  // CONTEXT
+  const { user } = useContext(TodoContext)
+  
   return (
    <div>
       <div className="todoform">
         {" "}
         <form onSubmit={(e) => handleSubmit(e)}>
-          { !isLoggedIn ?
+          { !user ?
             (
             <>
               <div className="text">

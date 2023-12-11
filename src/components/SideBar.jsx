@@ -10,7 +10,7 @@ const SideBar = ({toggleTodoModal, todoModalState, toggleNewProjectModal, newPro
    const sidebarRef = useRef()
 
    // CONTEXT
-   const { setSelectedTodo } = useContext(TodoContext)
+   const { user, setSelectedTodo } = useContext(TodoContext)
 
    // DOCUMENT CLICK LISTENER
    useEffect(() => {
@@ -30,10 +30,14 @@ const SideBar = ({toggleTodoModal, todoModalState, toggleNewProjectModal, newPro
   return (
     <div className='sidebar' ref={sidebarRef}>
       <User />
-      <AddNewTodo toggleTodoModal={toggleTodoModal} todoModalState={todoModalState}/>
-      <Calendar />
-      <Projects toggleNewProjectModal={toggleNewProjectModal} newProjectModalState={newProjectModalState} toggleEditProjectModal={toggleEditProjectModal} editProjectModalState={editProjectModalState}/>
-    </div>
+      {user && (
+        <>
+          <AddNewTodo toggleTodoModal={toggleTodoModal} todoModalState={todoModalState}/>
+          <Calendar />
+          <Projects toggleNewProjectModal={toggleNewProjectModal} newProjectModalState={newProjectModalState} toggleEditProjectModal={toggleEditProjectModal} editProjectModalState={editProjectModalState}/>
+        </>
+      )}
+      </div>
   )
 }
 

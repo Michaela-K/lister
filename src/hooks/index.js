@@ -1,7 +1,8 @@
 import moment from 'moment'
 import { useState, useEffect } from 'react'
-import { db } from '../firebase'
+import { auth, db } from '../firebase'
 import { onSnapshot, collection, query } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
 
 
 export const useTodos = () => {
@@ -99,6 +100,41 @@ export function useProjectsWithStats(todos, projects){
 
     return projectsWithStats
 }
+
+export function useLoggedInUser() {
+    const [user, setUser] = useState("")
+    //CHECK IF USER IS SIGNED IN
+    useEffect(() => {
+
+        //Functions like onAuthStateChanged that involve asynchronous operations might not complete immediately. Placing them inside a useEffect ensures they don't interfere with the normal component rendering process. It helps manage the timing of when certain operations should occur in the component lifecycle.
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        if (user) {
+            console.log("Context - Logged in as ", user);
+            setUser(user)
+        } else {
+            console.log("Logged out");
+        }
+        });
+    
+        // Cleanup function to unsubscribe when the component is unmounted
+        return () => unsubscribe();
+        //The cleanup function returned by useEffect is used to unsubscribe or clean up resources when the component is unmounted. This helps prevent memory leaks and ensures that there are no lingering subscriptions or operations after the component is no longer in use.
+    }, []); // Empty dependency array ensures it runs once on mount
+
+  return user;
+}
+
+// MOUNTING:
+// Component mounts.
+// useEffect runs because of the empty dependency array.
+// onAuthStateChanged subscribes to authentication state changes.
+
+// UNMOUNTING:
+// Component is about to unmount.
+// Cleanup function returned by useEffect is executed.
+// onAuthStateChanged unsubscribes from authentication state changes.
+// This pattern is especially crucial when dealing with event listeners or subscriptions to avoid memory leaks and unexpected behavior. It ensures that you clean up resources associated with the component when it's no longer needed.
+ 
 
 
 

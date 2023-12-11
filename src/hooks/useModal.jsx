@@ -5,6 +5,7 @@ export const ACTIONS = {
   TOGGLE_TODO_MODAL: "TOGGLE_TODO_MODAL",
   TOGGLE_NEW_PROJECT_MODAL: "TOGGLE_NEW_PROJECT_MODAL",
   TOGGLE_EDIT_PROJECT_MODAL: "TOGGLE_EDIT_PROJECT_MODAL",
+  TOGGLE_LOGIN_MODAL: "TOGGLE_LOGIN_MODAL",
 };
 
 const reducer = (state, action) => {
@@ -24,6 +25,11 @@ const reducer = (state, action) => {
         ...state,
         editProjectModalState: !state.editProjectModalState,
       };
+    case "TOGGLE_LOGIN_MODAL":
+      return {
+        ...state,
+        loginModalState: !state.loginModalState,
+     };
     default:
       return state;
   }
@@ -33,7 +39,8 @@ export default function useApplicationData() {
   const initialStates = {
     todoModalState: false,
     newProjectModalState: false,
-    editProjectModalState: false
+    editProjectModalState: false,
+    loginModalState: false,
   };
   const [state, dispatch] = useReducer(reducer, initialStates);
 
@@ -46,6 +53,9 @@ export default function useApplicationData() {
   const toggleEditProjectModal = () => {
     dispatch({ type: ACTIONS.TOGGLE_EDIT_PROJECT_MODAL });
   };
+  const toggleLogInModal = () => {
+    dispatch({ type: ACTIONS.TOGGLE_LOGIN_MODAL });
+  }
 
     
   return {
@@ -54,6 +64,8 @@ export default function useApplicationData() {
     toggleNewProjectModal,
     newProjectModalState: state.newProjectModalState,
     toggleEditProjectModal,
-    editProjectModalState: state.editProjectModalState
+    editProjectModalState: state.editProjectModalState,
+    toggleLogInModal,
+    loginModalState: state.loginModalState
   };
 }

@@ -1,39 +1,47 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Plus } from 'react-bootstrap-icons'
 import Modal from './Modal'
 import ProjectForm from './ProjectForm'
 import { db } from "../firebase";
 import { addDoc, collection, query, where, getDocs } from "firebase/firestore";
+import { TodoContext } from '../context';
 
 const AddNewProject = ({toggleNewProjectModal, newProjectModalState}) => {
+  //CONTEXT
+  const {user} = useContext(TodoContext)
   const [projectName, setProjectName] = useState('')
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (projectName) {
-      const projectsRef = collection(db, 'projects');
+    const projectsRef = collection(db, 'projects');
+    const userProjectQuery = query(projectsRef, where('userId', '==', user.uid));
+    if (userProjectQuery){
       
-      const projectQuery = query(projectsRef, where('name', '==', projectName));
-      
-      getDocs(projectQuery)
-      .then((querySnapshot) => {
-        if (querySnapshot.empty) {   // if proj name doesn't exist
-          console.log("adding project")
-          addDoc(projectsRef, {
-            name: projectName,
-          });
-        } else {
-          alert('Project name already exists!');
-        }
-      })
-      .catch((error) => {
-        console.error('Error checking project existence:', error);
-      });
-
-    toggleNewProjectModal(false);
-    setProjectName('');
+      if (projectName) {
+        const projectQuery = query(projectsRef, where('name', '==', projectName));
+        
+        getDocs(projectQuery)
+        .then((querySnapshot) => {
+          if (querySnapshot.empty) {   // if proj name doesn't exist
+            console.log("adding project")
+            addDoc(projectsRef, {
+              name: projectName,
+              userId: user.uid,
+            });
+          } else {
+            alert('Project name already exists!');
+          }
+        })
+        .catch((error) => {
+          console.error('Error checking project existence:', error);
+        });
+  
+      toggleNewProjectModal(false);
+      setProjectName('');
+      }
     }
-  }
+    
+}
 
   return (
   <div className='addNewProject'>

@@ -10,7 +10,7 @@ const LogInOutForm = ({ handleSubmit, heading = false, toggleModal = false, emai
    <div>
       <div className="todoform">
         {" "}
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <form onSubmit={(e) => {handleSubmit(e); toggleModal()}}>
           { !user ?
             (
             <>

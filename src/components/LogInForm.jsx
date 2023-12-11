@@ -38,7 +38,7 @@ const LogInOutForm = ({ handleSubmit, heading = false, toggleModal = false, emai
                 <X size="40" />
               </div>
               <div className="confirm">
-                <button type="submit" > Add New User</button>
+                <button type="submit" > Log In </button>
               </div>
             </div>
           </>

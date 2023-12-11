@@ -8,11 +8,11 @@ function TodoContextProvider({children}){
     const [selectedProject, setSelectedProject] = useState(defaultProject)
     const [selectedTodo, setSelectedTodo] = useState(undefined)
 
+    const loggedInUser = useLoggedInUser()
     const todos = useTodos()
     const projects = useProjects()
     const projectsWithStats = useProjectsWithStats(todos, projects)
     const filteredTodos = useFilterTodos(todos, selectedProject)
-    const loggedInUser = useLoggedInUser()
 
     return (
         <TodoContext.Provider

@@ -101,9 +101,9 @@ export function useProjectsWithStats(todos, projects){
     return projectsWithStats
 }
 
+//CHECK IF USER IS SIGNED IN
 export function useLoggedInUser() {
     const [user, setUser] = useState("")
-    //CHECK IF USER IS SIGNED IN
     useEffect(() => {
 
         //Functions like onAuthStateChanged that involve asynchronous operations might not complete immediately. Placing them inside a useEffect ensures they don't interfere with the normal component rendering process. It helps manage the timing of when certain operations should occur in the component lifecycle.

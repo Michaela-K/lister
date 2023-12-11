@@ -69,7 +69,7 @@ return (
     <div className="logo">{/* <img alt="logo" /> */}</div>
     <div className="info">
     <p>To Do</p>
-    <p> {user.email} </p>
+    <p> {user && user.email} </p>
         {user ? (
           <button onClick={handleLogOut}>Sign Out</button>
         ) : (

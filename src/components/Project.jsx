@@ -9,39 +9,46 @@ import { useTransition, useSpring, animated } from 'react-spring'
 
 const Project = ({project, toggleEdit, toggleEditProjectModal, editProjectModalState}) => {
    //CONTEXT
-   const {defaultProject, selectedProject, setSelectedProject} = useContext(TodoContext);
+   const {user, defaultProject, selectedProject, setSelectedProject} = useContext(TodoContext);
 
   const deleteProject = project => {
-    //Create a reference to the specific project document to be deleted
-    const projectDocRef = doc(collection(db, 'projects'), project.id); 
+  // Check if the authenticated user is the owner of the project
+  if (user.uid !== project.userId) {
+    console.log(user.uid, project)
+    console.error('Permission denied. The user is not the owner of this project.');
+    return;
+  }
 
-    // This line calls the deleteDoc function to delete the project. It returns a promise
-    deleteDoc(projectDocRef) 
-      .then(() => {
-        //create reference to the 'todos' collection
-        const todosCollectionRef = collection(db, 'todos');
-        //a query that filters todos based on the projectName field matching the name of the project being deleted.
-        const todosQuery = query(todosCollectionRef, where('projectName', '==', project.name));
-        return getDocs(todosQuery);
-      }) //getDocs asynchronously retrieves docs that match the query.
-      //The then block is used to handle the success case and receives a querySnapshot containing the documents.
-      .then((querySnapshot) => {
-        //This section creates an array of promises (deletePromises) by mapping over the documents in the querySnapshot and applying the deleteDoc function to each document's reference (doc.ref). 
-        //The array of promises is then passed to Promise.all to wait for all deletions to complete.
-        //MORE NOTES BELOW
-        const deletePromises = querySnapshot.docs.map((doc) => deleteDoc(doc.ref));
-        return Promise.all(deletePromises);
-      })
-      .then(() => {
-        // Check and update selectedProject
-        if (selectedProject === project.name) {
-          setSelectedProject(defaultProject);  //switch back to "Today"
-        }
-      })
-      .catch((error) => {
-        console.error('Error deleting project:', error);
-      });
-    }
+  //Create a reference to the specific project document to be deleted
+  const projectDocRef = doc(collection(db, 'projects'), project.id); 
+
+  // This line calls the deleteDoc function to delete the project. It returns a promise
+  deleteDoc(projectDocRef) 
+    .then(() => {
+      //create reference to the 'todos' collection
+      const todosCollectionRef = collection(db, 'todos');
+      //a query that filters todos based on the projectName field matching the name of the project being deleted.
+      const todosQuery = query(todosCollectionRef, where('userId', '==', user.uid),where('projectName', '==', project.name));
+      return getDocs(todosQuery);
+    }) //getDocs asynchronously retrieves docs that match the query.
+    //The then block is used to handle the success case and receives a querySnapshot containing the documents.
+    .then((querySnapshot) => {
+      //This section creates an array of promises (deletePromises) by mapping over the documents in the querySnapshot and applying the deleteDoc function to each document's reference (doc.ref). 
+      //The array of promises is then passed to Promise.all to wait for all deletions to complete.
+      //MORE NOTES BELOW
+      const deletePromises = querySnapshot.docs.map((doc) => deleteDoc(doc.ref));
+      return Promise.all(deletePromises);
+    })
+    .then(() => {
+      // Check and update selectedProject
+      if (selectedProject === project.name) {
+        setSelectedProject(defaultProject);  //switch back to "Today"
+      }
+    })
+    .catch((error) => {
+      console.error('Error deleting project:', error);
+    });
+  }
 
     // ANIMATION
     const fadeIn = useSpring({

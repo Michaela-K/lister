@@ -70,9 +70,11 @@ export function useProjects(){
             const data = snapshot.docs.map((doc) => {
                 return {
                     id: doc.id,
-                    name: doc.data().name
+                    name: doc.data().name,
+                    userId: doc.data().userId
                 };
             });
+            console.log(data)
             setProjects(data);
         });
 

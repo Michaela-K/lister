@@ -6,6 +6,7 @@ import useModal from '../hooks/useModal';
 import Modal from './Modal';
 import { TodoContext } from '../context';
 import RegistrationForm from './RegistrationForm';
+import logo from "../images/logo.png"
 
 const User = () => {
 // CONTEXT
@@ -66,7 +67,7 @@ const handleLogOut = (e) =>{
 
 return (
   <div className="user">
-    <div className="logo">{/* <img alt="logo" /> */}</div>
+    <div className="logo"><img alt="logo" src={logo} /></div>
     <div className="info">
     <p>To Do</p>
     <p> {user && user.email} </p>

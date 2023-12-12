@@ -14,16 +14,18 @@ const AddNewProject = ({toggleNewProjectModal, newProjectModalState}) => {
   function handleSubmit(e) {
     e.preventDefault();
     const projectsRef = collection(db, 'projects');
-    const userProjectQuery = query(projectsRef, where('userId', '==', user.uid));
-    if (userProjectQuery){
-      
-      if (projectName) {
-        const projectQuery = query(projectsRef, where('name', '==', projectName));
-        
-        getDocs(projectQuery)
+    
+    if (user && projectName) { // Check if the user is authenticated and projectName is defined
+      const projectQuery = query(
+        projectsRef,
+        where('userId', '==', user.uid), // Filter by the authenticated user's UID
+        where('name', '==', projectName)
+      );
+  
+      getDocs(projectQuery)
         .then((querySnapshot) => {
-          if (querySnapshot.empty) {   // if proj name doesn't exist
-            console.log("adding project")
+          if (querySnapshot.empty) { // If no matching project exists
+            console.log("adding project");
             addDoc(projectsRef, {
               name: projectName,
               userId: user.uid,
@@ -38,10 +40,8 @@ const AddNewProject = ({toggleNewProjectModal, newProjectModalState}) => {
   
       toggleNewProjectModal(false);
       setProjectName('');
-      }
     }
-    
-}
+  }
 
   return (
   <div className='addNewProject'>

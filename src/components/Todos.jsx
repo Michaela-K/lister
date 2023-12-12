@@ -4,10 +4,12 @@ import Next7Days from './Next7Days'
 import { TodoContext } from '../context';
 
 const Todos = () => {
-  const {todos, selectedProject} = useContext(TodoContext);
+  const {user, todos, selectedProject} = useContext(TodoContext);
 
   return (
     <div className='todos'>
+      {user? 
+      <>
       <div className='selected-project'>
         {selectedProject}
       </div>
@@ -21,6 +23,10 @@ const Todos = () => {
           )
         }
       </div>
+      </>
+       :
+       " Sign In to Continue "
+      }
     </div>
   )
 }

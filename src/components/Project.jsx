@@ -64,7 +64,7 @@ const Project = ({project, toggleEdit, toggleEditProjectModal, editProjectModalS
   return (
     // <div>
       <animated.div style={fadeIn} className='project'>
-        <div className="name" >
+        <div className="name"  onClick={() => setSelectedProject(project.name)}>
           {project.name}
         </div>
         <div className="btns">

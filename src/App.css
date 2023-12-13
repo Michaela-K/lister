@@ -472,3 +472,29 @@
 .next7Days .day .total-todos {
   margin-left: 10px;
 }
+
+/* SignIn */
+.signIn{
+  margin-top: 40vh;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.message{
+  background-color: rgb(20, 20, 20);
+  color: rgb(246, 234, 210);
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  border-radius: 12px;
+}
+
+button{
+  /* background-color: rgb(20, 20, 20); */
+  /* color: rgb(246, 242, 234); */
+  border-radius: 10px;
+  padding: 5px;
+  margin-right: 5px;
+  font-size: medium;
+}

@@ -9,7 +9,7 @@ import { useTransition, useSpring, animated } from 'react-spring'
 
 const Project = ({project, toggleEdit, toggleEditProjectModal, editProjectModalState}) => {
    //CONTEXT
-   const {user, defaultProject, selectedProject, setSelectedProject} = useContext(TodoContext);
+   const {user, defaultProject, selectedProject, setSelectedProject, selectedProjectToEdit,setSelectedProjectToEdit} = useContext(TodoContext);
 
   const deleteProject = project => {
   // Check if the authenticated user is the owner of the project
@@ -64,7 +64,7 @@ const Project = ({project, toggleEdit, toggleEditProjectModal, editProjectModalS
   return (
     // <div>
       <animated.div style={fadeIn} className='project'>
-        <div className="name" onClick={() => setSelectedProject(project.name)}>
+        <div className="name" >
           {project.name}
         </div>
         <div className="btns">
@@ -72,7 +72,7 @@ const Project = ({project, toggleEdit, toggleEditProjectModal, editProjectModalS
             { btnTransitions((props, callback) =>  
             callback ?
               <animated.div style={props} className="edit-delete">
-                <span className="edit" onClick={() => {toggleEditProjectModal(); setSelectedProject(project.name); console.log("Project name and ",project.name, selectedProject);}}>
+                <span className="edit" onClick={() => {setSelectedProject(project.name); setSelectedProjectToEdit(project); toggleEditProjectModal(); console.log("Project name is : ",project.name, "Project ID is : ", project.id, " Selected Project is : ",selectedProject, "Selected Project to Edit is :", selectedProjectToEdit);}}>
                   <Pencil size="13" />
                 </span>
                 <span className="delete" onClick={() => deleteProject(project)}>
@@ -90,7 +90,7 @@ const Project = ({project, toggleEdit, toggleEditProjectModal, editProjectModalS
             }
         </div>
         <Modal modalState={editProjectModalState} toggleModal={toggleEditProjectModal}>
-          <RenameProject toggleEditProjectModal={toggleEditProjectModal} project={project} selectedProject={selectedProject} />
+          <RenameProject toggleEditProjectModal={toggleEditProjectModal} selectedProject={selectedProject} selectedProjectToEdit={selectedProjectToEdit}/>
         </Modal>
       </animated.div>
     // </div>

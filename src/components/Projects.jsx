@@ -53,10 +53,11 @@ const Projects = ({toggleNewProjectModal, newProjectModalState, toggleEditProjec
         </div>
         <animated.div style={menuAnimation} className="items">
         <div className="items">
-          {projects.map((project) => ( 
-            // console.log(project.numOfTodos)
-            <Project key={project.id} toggleEdit={toggleEdit} project={project} toggleNewProjectModal={toggleNewProjectModal} newProjectModalState={newProjectModalState} toggleEditProjectModal={toggleEditProjectModal} editProjectModalState={editProjectModalState}/>
-          ))}
+          {projects.map((project) => {
+            return (
+              <Project key={project.id} toggleEdit={toggleEdit} project={project} toggleNewProjectModal={toggleNewProjectModal} newProjectModalState={newProjectModalState} toggleEditProjectModal={toggleEditProjectModal} editProjectModalState={editProjectModalState}/>
+            );
+          })}
         </div>
         </animated.div>
       </div>

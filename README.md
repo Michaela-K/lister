@@ -1,70 +1,118 @@
-# Getting Started with Create React App
+<a id="readme-top"></a>
+<h1 align="center"> Lister </h1>
+Lister was created to keep track of Todos in various pre set categories in the Calendar (Today, Next 7 Days and All Days)
+<br/>
+Users can log in and add their own Categories called Projects and add Todo's under. 
+<br />
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h3 align="center">
+  <a href=""> *DEMO (WIP)*</a> | <a href="https://github.com/Michaela-K/to_do/issues">* Report a Bug *</a>
+</h3>
 
-## Available Scripts
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#features">Features</a></li>
+  </ol>
+</details>
 
-In the project directory, you can run:
 
-### `npm start`
+<!-- ABOUT THE PROJECT -->
+## About the Project <a id="about"></a>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![BookMark Demo](public/BookMark-Demo.gif)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Built With 
 
-### `npm test`
+- Firebase
+- React
+- JavaScript
+- CSS
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<p align="right"><a href="#readme-top">back to top</a></p>
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<!-- GETTING STARTED -->
+## Getting Started <a id="getting-started"></a>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Installation <a id="installation"></a>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repo
+   ```sh
+   git clone git@github.com:Michaela-K/to_do.git
+   ```
+2. Install NPM packages in the root directory
+   ```sh
+   cd to_do
+   npm install
+   ```
+3. Create a Firebase Project
+    
+    - Go to your <a href="https://console.firebase.google.com">Firebase Console</a>
+    - Sign In with your Google account
+    - Click on 'Add Project' and follow the instructions to create a new Firebase project
+    
+4. Configure Firebase
+    - In the Firebase Console, select your project
+    - Navigate to "Project settings" > "General" > "Your apps" and add a new web app.
+    - Copy the Firebase config object
 
-### `npm run eject`
+5. Set Up Firebase Configuration in React App
+    - In your React project, create a ".env" file in the root directory
+    - Add your Firebase configuration to this file as environment variables:
+    ```sh
+    REACT_APP_FIREBASE_API_KEY=your_api_key
+    REACT_APP_FIREBASE_AUTH_DOMAIN=your_auth_domain
+    REACT_APP_FIREBASE_PROJECT_ID=your_project_id      REACT_APP_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+    REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+    REACT_APP_FIREBASE_APP_ID=your_app_id
+    ```
+    
+6. Initialize Firebase in the App
+    - In your React app, initialize Firebase using the config stored in the .env file. 
+    - Enter this in the firebase.js file.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    ```sh
+    const firebaseConfig = {
+      apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+      authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+      projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+      storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+      messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+      appId: process.env.REACT_APP_FIREBASE_APP_ID
+    };
+    ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+7. Start the app
+   ```sh
+   npm start
+   Visit `http://localhost:3000/`
+   ```
+<p align="right"><a href="#readme-top">back to top</a></p>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Features <a id="features"></a>
+- [ ] Host project (Work in Progress)
+- [x] Register user
+- [x] Sign In / Sign Out User
+- [x] Add New Todo (day, time, project)
+- [x] Edit todo
+- [x] Delete todo
+- [x] Add a Project
+- [x] Edit a Project
+- [x] Delete Project
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<p align="right"><a href="#readme-top">back to top</a></p>

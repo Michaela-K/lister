@@ -15,7 +15,7 @@ const { user} = useContext(TodoContext)
 //STATE
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
-
+//MODAL
 const {loginModalState, toggleLogInModal, registerModalState, toggleRegisterModal} = useModal()
 
 const createUser = (email, password) => {
@@ -46,7 +46,6 @@ const handleLogIn = (e) =>{
   e.preventDefault()
    loginUser(email, password)
    .then((userCredential) => {
-    //  console.log('UserCredential: ', userCredential.user);
      console.log("handleLogin : ", userCredential.user)
    })
    .catch((error) => {

@@ -13,8 +13,9 @@ import { TodoContext } from "../context";
 import { db } from "../firebase";
 
 const RenameProject = ({selectedProject, selectedProjectToEdit}) => {
-  const [newProjectName, setNewProjectName] = useState(selectedProject); //the default selectedProject is "today", it gets changed in Project.jsx when user clicks on edit button
-  
+  //STATE
+  const [newProjectName, setNewProjectName] = useState(selectedProject);
+  //MODAL
   const {toggleEditProjectModal} = useModal()
   // CONTEXT
   const { setSelectedProject, user } = useContext(TodoContext);
@@ -33,18 +34,16 @@ const RenameProject = ({selectedProject, selectedProjectToEdit}) => {
     const projectsRef = collection(db, "projects");
     const todosRef = collection(db, "todos");
 
-    const { name: oldProjectName } = project; //Destructures the name property from the project object and assigns it to oldProjectName
+    const { name: oldProjectName } = project; 
 
     console.log("newProjectName : ", newProjectName, "oldProjectName :", oldProjectName)
 
-    //check if a project with the new name already exists in the 'projects' collection.
-    getDocs(query(projectsRef, where('userId', '==', user.uid), where("name", "==", newProjectName))) //Executes the query and returns a promise that resolves to a querySnapshot.
+    getDocs(query(projectsRef, where('userId', '==', user.uid), where("name", "==", newProjectName)))
       .then((querySnapshot) => {
         if (!querySnapshot.empty) {
-          //if true then a project with the same name does exist
           alert("Project with the same name already exists!");
         } else {
-          const projectDocRef = doc(projectsRef, project.id); //If no existing project is found, it creates a reference to the specific project document to be updated using doc
+          const projectDocRef = doc(projectsRef, project.id);
           console.log("Project updated at this ID", project.id)
           updateDoc(projectDocRef, {
             name: newProjectName,
@@ -52,11 +51,11 @@ const RenameProject = ({selectedProject, selectedProjectToEdit}) => {
             .then(() => {
               getDocs(
                 query(todosRef, where('userId', '==', user.uid), where("projectName", "==", oldProjectName))
-              ) //query to find todos associated with the old project name in the 'todos' collection. getDocs: Executes the query and returns a promise that resolves to a querySnapshot
+              )
                 .then((querySnapshot) => {
                   const updatePromises = querySnapshot.docs.map(
                     (
-                      doc //Map over the todos and creates an array of promises (updatePromises) to update each todo's 'projectName' field to the new name.
+                      doc 
                     ) =>
                       updateDoc(doc.ref, {
                         projectName: newProjectName,

@@ -12,21 +12,20 @@ import randomcolor from "randomcolor";
 const AddNewTodo = () => {
   // CONTEXT
   const { user, projects, selectedProject } = useContext(TodoContext);
-  const {toggleTodoModal, todoModalState} = useModal()
-
   // STATE
   const [text, setText] = useState("");
   const [day, setDay] = useState(new Date());
   const [time, setTime] = useState(new Date());
   const [todoProject, setTodoProject] = useState(selectedProject);
+  //MODAL
+  const {toggleTodoModal, todoModalState} = useModal()
 
   function handleSubmit(e) {
     e.preventDefault();
     if (text && !calendarItems.includes(todoProject)) {
       console.log("adding todo")
-      //if there is text and the project ! = next7days, today etc ....
 
-    const todosCollectionRef = collection(db, 'todos'); // Reference to the 'todos' collection
+    const todosCollectionRef = collection(db, 'todos');
       addDoc(todosCollectionRef, {
         text: text,
         date: moment(day).format("MM/DD/YYYY"),
@@ -35,19 +34,16 @@ const AddNewTodo = () => {
         checked: false,
         color: randomcolor({ luminosity: "dark" }),
         projectName: todoProject,
-        userId: user.uid, // Include the user UID
-        // createdAt: serverTimestamp(), // Use serverTimestamp to get the server's time 
+        userId: user.uid, 
       })
       .then(() => {
-        // Handle success if needed
         console.log("Todo added successfully");
       })
       .catch((error) => {
-        // Handle error if needed
         console.error("Error adding todo:", error);
       });
 
-      //reset
+      //RESET
       toggleTodoModal(false);
       setText("");
       setDay(new Date());
@@ -55,7 +51,6 @@ const AddNewTodo = () => {
     }
   }
 
-  //useEffect called after render is complete
   useEffect(() => {
     setTodoProject(selectedProject);
   }, [selectedProject]);

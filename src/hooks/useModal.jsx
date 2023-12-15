@@ -1,4 +1,3 @@
-//provide the actions to update the state, causing the component to render.
 import {useReducer } from "react";
 
 export const ACTIONS = {

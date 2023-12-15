@@ -18,6 +18,7 @@ import moment from "moment";
 import { useSpring, useTransition, animated } from "react-spring";
 
 const Todo = ({ todo }) => {
+  //STATE
   const [hover, setHover] = useState(false);
 
   // CONTEXT
@@ -29,7 +30,6 @@ const Todo = ({ todo }) => {
     deleteDoc(deleteTodoDocRef)
       .then(() => {
         console.log("Todo deleted successfully");
-        // Additional logic after successful deletion, if needed
       })
       .catch((error) => {
         console.error("Error deleting todo:", error);
@@ -51,22 +51,18 @@ const Todo = ({ todo }) => {
   };
 
   const repeatNextDay = (todo) => {
-    const nextDayDate = moment(todo.date, "MM/DD/YYYY").add(1, "days"); //pass string into JS date obj called moment and use the moment add method
+    const nextDayDate = moment(todo.date, "MM/DD/YYYY").add(1, "days"); 
 
     const repeatedTodo = {
-      ...todo, //old todo info -> color, projectName, text, time
-      //override the remaining data with new data
+      ...todo, 
       date: nextDayDate.format("MM/DD/YYYY"),
       day: nextDayDate.format("d"),
       checked: false,
     };
-    // console.log('1) Repeated Todo ID before delete: ', repeatedTodo.id);
     delete repeatedTodo.id;
-    // console.log('1) Repeated Todo ID after delete: ', repeatedTodo.id);
 
     addDoc(collection(db, "todos"), repeatedTodo)
       .then((data) => {
-        // console.log('2) Repeated to do added with new ID', data.id );
       })
       .catch((error) => {
         console.error("Error checking project existence:", error);

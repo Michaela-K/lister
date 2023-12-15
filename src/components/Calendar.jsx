@@ -5,9 +5,9 @@ import {calendarItems} from "../constants"
 import { useSpring, animated } from 'react-spring'
 
 const Calendar = () => {
-  // SATATE
+  // STATE
   const [showMenu, setShowMenu] = useState(true)
-
+  //CONTEXT
   const { setSelectedProject } = useContext(TodoContext);
 
    // ANIMATION

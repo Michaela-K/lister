@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import TodoForm from "./TodoForm";
 import { TodoContext } from '../context'
-// import { collection, doc, updateDoc } from "firebase/firestore";
 import { collection, doc, updateDoc} from "firebase/firestore";
 import { db } from "../firebase";
 import moment from "moment";
@@ -9,7 +8,7 @@ import moment from "moment";
 const EditTodo = () => {
   // CONTEXT
   const {selectedProject, selectedTodo :todo, projects } = useContext(TodoContext)
-
+  //STATE
   const [text, setText] = useState("");
   const [day, setDay] = useState(new Date());
   const [time, setTime] = useState(new Date());
@@ -22,7 +21,7 @@ const EditTodo = () => {
       setTime(moment(todo.time, 'hh:mm A').toDate());
       setTodoProject(todo.projectName)
     }
-  }, [todo]) //chnage the state only if the selected todos have changed
+  }, [todo])
 
   useEffect( () => {
     if(todo){

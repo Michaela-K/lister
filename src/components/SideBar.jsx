@@ -16,13 +16,12 @@ const SideBar = () => {
    useEffect(() => {
        document.addEventListener('click', handleClick)
        
-       return () => document.removeEventListener('click', handleClick)  //removes the listener to cleanup after it unmounts
+       return () => document.removeEventListener('click', handleClick) 
    }, [])
    
    // HANDLE CLICK
    const handleClick = e => {
        if( e.target === sidebarRef.current || sidebarRef.current.contains(e.target)){
-        //contains - checks to see if an element is a decendent of another element
            setSelectedTodo(false)
        }
    }

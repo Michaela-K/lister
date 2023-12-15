@@ -8,8 +8,9 @@ import useModal from '../hooks/useModal'
 import { TodoContext } from '../context';
 
 const AddNewProject = () => {
+  //STATE
   const [projectName, setProjectName] = useState('')
-
+  //MODAL
   const { toggleNewProjectModal, newProjectModalState} = useModal()
   //CONTEXT
   const {user} = useContext(TodoContext)
@@ -18,16 +19,16 @@ const AddNewProject = () => {
     e.preventDefault();
     const projectsRef = collection(db, 'projects');
 
-    if (user && projectName) { // Check if the user is authenticated and projectName is defined
+    if (user && projectName) {
       const projectQuery = query(
         projectsRef,
-        where('userId', '==', user.uid), // Filter by the authenticated user's UID
+        where('userId', '==', user.uid),
         where('name', '==', projectName)
       );
         
         getDocs(projectQuery)
         .then((querySnapshot) => {
-          if (querySnapshot.empty) {   // if proj name doesn't exist
+          if (querySnapshot.empty) {
             console.log("adding project")
             addDoc(projectsRef, {
               name: projectName,

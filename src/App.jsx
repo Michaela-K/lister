@@ -1,7 +1,6 @@
 import './App.css';
 import SideBar from './components/SideBar'
 import Main from './components/Main'
-import useModal from './hooks/useModal';
 
 function App() {
 

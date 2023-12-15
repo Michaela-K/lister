@@ -34,8 +34,7 @@ const handleRegistration = (e) => {
   e.preventDefault();
   createUser(email, password)
     .then((userCredential) => {
-      console.log('Registration successful:', userCredential.user);
-      console.log('UserCredential: ', userCredential.user);
+      // console.log('Registration successful of User :', userCredential.user);
     })
     .catch((error) => {
       console.error('Error creating user:', error.message);
@@ -46,7 +45,7 @@ const handleLogIn = (e) =>{
   e.preventDefault()
    loginUser(email, password)
    .then((userCredential) => {
-     console.log("handleLogin : ", userCredential.user)
+    //  console.log("User logged In : ", userCredential.user)
    })
    .catch((error) => {
      console.error('Error creating user:', error.message);
@@ -57,7 +56,7 @@ const handleLogOut = (e) =>{
   e.preventDefault()
    signOutUser(auth)
    .then((userCredential) => {
-     console.log('UserCredential: ', userCredential);
+    //  console.log('User Logged Out: ', userCredential.user);
    })
    .catch((error) => {
      console.error('Error creating user:', error.message);

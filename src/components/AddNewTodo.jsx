@@ -23,7 +23,6 @@ const AddNewTodo = () => {
   function handleSubmit(e) {
     e.preventDefault();
     if (text && !calendarItems.includes(todoProject)) {
-      console.log("adding todo")
 
     const todosCollectionRef = collection(db, 'todos');
       addDoc(todosCollectionRef, {

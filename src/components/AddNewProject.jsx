@@ -29,7 +29,6 @@ const AddNewProject = () => {
         getDocs(projectQuery)
         .then((querySnapshot) => {
           if (querySnapshot.empty) {
-            console.log("adding project")
             addDoc(projectsRef, {
               name: projectName,
               userId: user.uid,
@@ -37,6 +36,9 @@ const AddNewProject = () => {
           } else {
             alert('Project name already exists!');
           }
+        })
+        .then(() => {
+          console.log("Project added successfully");
         })
         .catch((error) => {
           console.error('Error checking project existence:', error);

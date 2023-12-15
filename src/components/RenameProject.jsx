@@ -19,14 +19,10 @@ const RenameProject = ({selectedProject, selectedProjectToEdit}) => {
   const {toggleEditProjectModal} = useModal()
   // CONTEXT
   const { setSelectedProject, user } = useContext(TodoContext);
-  console.log("selectedProject :", selectedProject)
-  console.log("selectedProjectToEdit :", selectedProjectToEdit)
   const project = selectedProjectToEdit;
-  console.log("project", project)
 
   const renameProj = (project, newProjectName) => {
     if(user.uid !== project.userId){
-      console.log(user.uid, project)
       console.error('Permission denied. The user is not the owner of this project.');
       return;
     }
@@ -36,15 +32,12 @@ const RenameProject = ({selectedProject, selectedProjectToEdit}) => {
 
     const { name: oldProjectName } = project; 
 
-    console.log("newProjectName : ", newProjectName, "oldProjectName :", oldProjectName)
-
     getDocs(query(projectsRef, where('userId', '==', user.uid), where("name", "==", newProjectName)))
       .then((querySnapshot) => {
         if (!querySnapshot.empty) {
           alert("Project with the same name already exists!");
         } else {
           const projectDocRef = doc(projectsRef, project.id);
-          console.log("Project updated at this ID", project.id)
           updateDoc(projectDocRef, {
             name: newProjectName,
           })

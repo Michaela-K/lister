@@ -16,7 +16,6 @@ const Project = ({project, toggleEdit}) => {
 
   const deleteProject = project => {
   if (user.uid !== project.userId) {
-    console.log(user.uid, project)
     console.error('Permission denied. The user is not the owner of this project.');
     return;
   }
@@ -64,7 +63,7 @@ const Project = ({project, toggleEdit}) => {
             { btnTransitions((props, callback) =>  
             callback ?
               <animated.div style={props} className="edit-delete">
-                <span className="edit" onClick={() => {setSelectedProject(project.name); setSelectedProjectToEdit(project); toggleEditProjectModal(); console.log("Project name is : ",project.name, "Project ID is : ", project.id, " Selected Project is : ",selectedProject, "Selected Project to Edit is :", selectedProjectToEdit);}}>
+                <span className="edit" onClick={() => {setSelectedProject(project.name); setSelectedProjectToEdit(project); toggleEditProjectModal(); }}>
                   <Pencil size="13" />
                 </span>
                 <span className="delete" onClick={() => deleteProject(project)}>

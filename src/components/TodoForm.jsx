@@ -59,12 +59,6 @@ const TodoForm = ({
             <p>Choose a project</p>
           </div>
           <div className="projects">
-            {/* <div className="project active">
-              personal
-            </div>
-            <div className="project">
-              work
-            </div> */}
             {
             projects.length > 0 ?
             projects.map((project) => (

@@ -8,6 +8,7 @@ function TodoContextProvider({children}){
     const [selectedProject, setSelectedProject] = useState(defaultProject)
     const [selectedTodo, setSelectedTodo] = useState(undefined)
     const [selectedProjectToEdit, setSelectedProjectToEdit] = useState(undefined)
+    const [editProjectModal, setEditProjectModal] = useState(false)
 
     const loggedInUser = useLoggedInUser()
     const todos = useTodos()
@@ -29,6 +30,8 @@ function TodoContextProvider({children}){
                     user: loggedInUser,
                     selectedProjectToEdit,
                     setSelectedProjectToEdit,
+                    editProjectModal, 
+                    setEditProjectModal,
                 }
             }
         >

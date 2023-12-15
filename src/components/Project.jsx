@@ -2,17 +2,14 @@ import React, { useContext } from "react";
 import RenameProject from "./RenameProject";
 import Modal from "./Modal";
 import { Pencil, XCircle } from "react-bootstrap-icons";
-import useModal from '../hooks/useModal'
 import { TodoContext } from '../context';
 import { collection, deleteDoc, doc, getDocs, query, where } from "@firebase/firestore";
 import { db } from "../firebase";
 import { useTransition, useSpring, animated } from 'react-spring'
 
-const Project = ({project, toggleEdit}) => {
-  //MODAL
-  const {toggleEditProjectModal, editProjectModalState} = useModal()
+const Project = ({ toggleEdit, project}) => {
    //CONTEXT
-   const {user, defaultProject, selectedProject, setSelectedProject, selectedProjectToEdit,setSelectedProjectToEdit} = useContext(TodoContext);
+   const {user, defaultProject, selectedProject, setSelectedProject, selectedProjectToEdit,setSelectedProjectToEdit,editProjectModal, setEditProjectModal} = useContext(TodoContext);
 
   const deleteProject = project => {
   if (user.uid !== project.userId) {
@@ -63,7 +60,7 @@ const Project = ({project, toggleEdit}) => {
             { btnTransitions((props, callback) =>  
             callback ?
               <animated.div style={props} className="edit-delete">
-                <span className="edit" onClick={() => {setSelectedProject(project.name); setSelectedProjectToEdit(project); toggleEditProjectModal(); }}>
+                <span className="edit" onClick={() => {setSelectedProject(project.name); setSelectedProjectToEdit(project); setEditProjectModal(true);}}>
                   <Pencil size="13" />
                 </span>
                 <span className="delete" onClick={() => deleteProject(project)}>
@@ -80,7 +77,7 @@ const Project = ({project, toggleEdit}) => {
             )
             }
         </div>
-        <Modal modalState={editProjectModalState} toggleModal={toggleEditProjectModal}>
+        <Modal modalState={editProjectModal} toggleModal={setEditProjectModal}>
           <RenameProject selectedProject={selectedProject} selectedProjectToEdit={selectedProjectToEdit}/>
         </Modal>
       </animated.div>

@@ -2,7 +2,7 @@ import React from "react";
 
 const ProjectForm = ({handleSubmit, heading, value, setValue, toggleModal, confirmButtonText}) => {
   return (
-    <form onSubmit={handleSubmit} className="projectForm">
+    <form onSubmit={(e) => handleSubmit(e)} className="projectForm">
       <h3>{heading}</h3>
       <input
         value={value}
@@ -11,14 +11,11 @@ const ProjectForm = ({handleSubmit, heading, value, setValue, toggleModal, confi
         placeholder="project name..."
         autoFocus
       />
-      <button
-        className="cancel"
-        role="button" // this stops the button from submitting
-        onClick={() => toggleModal()}
-      >
-        cancel
+      <button className="cancel" type="button"
+        onClick={() => toggleModal()} >
+        Cancel
       </button>
-      <button className="confirm">{confirmButtonText}</button>
+      <button type="submit" className="confirm" >{confirmButtonText}</button>
     </form>
   );
 };

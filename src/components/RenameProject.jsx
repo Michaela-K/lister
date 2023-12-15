@@ -8,17 +8,15 @@ import {
   getDocs,
   updateDoc,
 } from "firebase/firestore";
-import useModal from '../hooks/useModal'
 import { TodoContext } from "../context";
 import { db } from "../firebase";
 
 const RenameProject = ({selectedProject, selectedProjectToEdit}) => {
   //STATE
   const [newProjectName, setNewProjectName] = useState(selectedProject);
-  //MODAL
-  const {toggleEditProjectModal} = useModal()
+
   // CONTEXT
-  const { setSelectedProject, user } = useContext(TodoContext);
+  const { setSelectedProject, user, editProjectModal, setEditProjectModal } = useContext(TodoContext);
   const project = selectedProjectToEdit;
 
   const renameProj = (project, newProjectName) => {
@@ -71,24 +69,25 @@ const RenameProject = ({selectedProject, selectedProjectToEdit}) => {
       .catch((error) => {
         console.error("Error checking existing project:", error);
       });
+
+      console.log("Project name Updated")
+      setEditProjectModal(false);
   };
 
   function handleSubmit(e) {
     e.preventDefault();
     renameProj(project, newProjectName);
-    toggleEditProjectModal(false);
   }
 
   return (
     <div>
-      Rename Project
       <div className="renameProject">
         <ProjectForm
           handleSubmit={handleSubmit}
           heading="Edit project name!"
           value={newProjectName}
           setValue={setNewProjectName}
-          toggleModal={toggleEditProjectModal}
+          toggleModal={() => setEditProjectModal(prevState => !prevState)}
           confirmButtonText="Confirm"
         />
       </div>

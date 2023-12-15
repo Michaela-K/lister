@@ -2,12 +2,14 @@ import React, { useContext } from "react";
 import RenameProject from "./RenameProject";
 import Modal from "./Modal";
 import { Pencil, XCircle } from "react-bootstrap-icons";
+import useModal from '../hooks/useModal'
 import { TodoContext } from '../context';
 import { collection, deleteDoc, doc, getDocs, query, where } from "@firebase/firestore";
 import { db } from "../firebase";
 import { useTransition, useSpring, animated } from 'react-spring'
 
-const Project = ({project, toggleEdit, toggleEditProjectModal, editProjectModalState}) => {
+const Project = ({project, toggleEdit}) => {
+  const {toggleEditProjectModal, editProjectModalState} = useModal()
    //CONTEXT
    const {user, defaultProject, selectedProject, setSelectedProject, selectedProjectToEdit,setSelectedProjectToEdit} = useContext(TodoContext);
 
@@ -90,7 +92,7 @@ const Project = ({project, toggleEdit, toggleEditProjectModal, editProjectModalS
             }
         </div>
         <Modal modalState={editProjectModalState} toggleModal={toggleEditProjectModal}>
-          <RenameProject toggleEditProjectModal={toggleEditProjectModal} selectedProject={selectedProject} selectedProjectToEdit={selectedProjectToEdit}/>
+          <RenameProject selectedProject={selectedProject} selectedProjectToEdit={selectedProjectToEdit}/>
         </Modal>
       </animated.div>
     // </div>

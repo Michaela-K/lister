@@ -5,14 +5,14 @@ import { CaretUp, Palette, PencilFill } from 'react-bootstrap-icons';
 import { TodoContext } from '../context';
 import { useSpring, animated } from 'react-spring'
 
-const Projects = ({toggleNewProjectModal, newProjectModalState, toggleEditProjectModal, editProjectModalState}) => {
+const Projects = () => {
 
   const [showMenu, setShowMenu] = useState(true);
   const [toggleEdit, setToggleEdit] = useState(false)
   const pencilColor = toggleEdit ? "#1EC94C" : "#000000"
 
   const {projects} = useContext(TodoContext)
-  // console.log(projects)
+
 
    // ANIMATION
   const spin = useSpring({
@@ -39,7 +39,7 @@ const Projects = ({toggleNewProjectModal, newProjectModalState, toggleEditProjec
                 <PencilFill size="15" color={pencilColor} />
               </span>
             )}
-            <AddNewProject toggleNewProjectModal={toggleNewProjectModal} newProjectModalState={newProjectModalState}/>
+            <AddNewProject />
             <animated.span
               className="arrow"
               onClick={() => setShowMenu(!showMenu)}
@@ -55,7 +55,7 @@ const Projects = ({toggleNewProjectModal, newProjectModalState, toggleEditProjec
         <div className="items">
           {projects.map((project) => {
             return (
-              <Project key={project.id} toggleEdit={toggleEdit} project={project} toggleNewProjectModal={toggleNewProjectModal} newProjectModalState={newProjectModalState} toggleEditProjectModal={toggleEditProjectModal} editProjectModalState={editProjectModalState}/>
+              <Project key={project.id} toggleEdit={toggleEdit} project={project} />
             );
           })}
         </div>

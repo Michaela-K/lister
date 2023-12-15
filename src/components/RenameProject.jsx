@@ -8,12 +8,14 @@ import {
   getDocs,
   updateDoc,
 } from "firebase/firestore";
+import useModal from '../hooks/useModal'
 import { TodoContext } from "../context";
 import { db } from "../firebase";
 
-const RenameProject = ({toggleEditProjectModal, selectedProject, selectedProjectToEdit}) => {
+const RenameProject = ({selectedProject, selectedProjectToEdit}) => {
   const [newProjectName, setNewProjectName] = useState(selectedProject); //the default selectedProject is "today", it gets changed in Project.jsx when user clicks on edit button
   
+  const {toggleEditProjectModal} = useModal()
   // CONTEXT
   const { setSelectedProject, user } = useContext(TodoContext);
   console.log("selectedProject :", selectedProject)

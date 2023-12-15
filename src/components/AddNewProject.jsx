@@ -4,12 +4,15 @@ import Modal from './Modal'
 import ProjectForm from './ProjectForm'
 import { db } from "../firebase";
 import { addDoc, collection, query, where, getDocs } from "firebase/firestore";
+import useModal from '../hooks/useModal'
 import { TodoContext } from '../context';
 
-const AddNewProject = ({toggleNewProjectModal, newProjectModalState}) => {
+const AddNewProject = () => {
+  const [projectName, setProjectName] = useState('')
+
+  const { toggleNewProjectModal, newProjectModalState} = useModal()
   //CONTEXT
   const {user} = useContext(TodoContext)
-  const [projectName, setProjectName] = useState('')
 
   function handleSubmit(e) {
     e.preventDefault();

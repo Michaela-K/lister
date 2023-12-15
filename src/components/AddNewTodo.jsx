@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Modal from "./Modal";
 import TodoForm from "./TodoForm";
+import useModal from "../hooks/useModal"
 import { TodoContext } from "../context";
 import {calendarItems} from '../constants'
 import { db } from "../firebase";
@@ -8,9 +9,10 @@ import { addDoc, collection } from "firebase/firestore";
 import moment from "moment";
 import randomcolor from "randomcolor";
 
-const AddNewTodo = ({ toggleTodoModal, todoModalState }) => {
+const AddNewTodo = () => {
   // CONTEXT
   const { user, projects, selectedProject } = useContext(TodoContext);
+  const {toggleTodoModal, todoModalState} = useModal()
 
   // STATE
   const [text, setText] = useState("");

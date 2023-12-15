@@ -5,7 +5,7 @@ import Calendar from './Calendar'
 import Projects from './Projects'
 import { TodoContext } from '../context'
 
-const SideBar = ({toggleTodoModal, todoModalState, toggleNewProjectModal, newProjectModalState, toggleEditProjectModal, editProjectModalState}) => {
+const SideBar = () => {
    // REF
    const sidebarRef = useRef()
 
@@ -32,9 +32,9 @@ const SideBar = ({toggleTodoModal, todoModalState, toggleNewProjectModal, newPro
       <User />
       {user && (
         <>
-          <AddNewTodo toggleTodoModal={toggleTodoModal} todoModalState={todoModalState}/>
+          <AddNewTodo />
           <Calendar />
-          <Projects toggleNewProjectModal={toggleNewProjectModal} newProjectModalState={newProjectModalState} toggleEditProjectModal={toggleEditProjectModal} editProjectModalState={editProjectModalState}/>
+          <Projects />
         </>
       )}
       </div>

@@ -28,7 +28,7 @@ function TodoContextProvider({children}){
                     setSelectedTodo,
                     user: loggedInUser,
                     selectedProjectToEdit,
-                    setSelectedProjectToEdit
+                    setSelectedProjectToEdit,
                 }
             }
         >

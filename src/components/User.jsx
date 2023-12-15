@@ -39,6 +39,7 @@ const handleRegistration = (e) => {
     .catch((error) => {
       console.error('Error creating user:', error.message);
     });
+    toggleRegisterModal()
 };
 
 const handleLogIn = (e) =>{

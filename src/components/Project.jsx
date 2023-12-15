@@ -56,7 +56,6 @@ const Project = ({ toggleEdit, project}) => {
           {project.name}
         </div>
         <div className="btns">
-          {/* if true, show the delete and edit buttons */}
             { btnTransitions((props, callback) =>  
             callback ?
               <animated.div style={props} className="edit-delete">

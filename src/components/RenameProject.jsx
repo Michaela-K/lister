@@ -16,7 +16,7 @@ const RenameProject = ({selectedProject, selectedProjectToEdit}) => {
   const [newProjectName, setNewProjectName] = useState(selectedProject);
 
   // CONTEXT
-  const { setSelectedProject, user, editProjectModal, setEditProjectModal } = useContext(TodoContext);
+  const { setSelectedProject, user, setEditProjectModal } = useContext(TodoContext);
   const project = selectedProjectToEdit;
 
   const renameProj = (project, newProjectName) => {

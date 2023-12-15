@@ -27,7 +27,6 @@ function TodoContextProvider({children}){
                     selectedTodo,
                     setSelectedTodo,
                     user: loggedInUser,
-                    selectedProject,
                     selectedProjectToEdit,
                     setSelectedProjectToEdit
                 }

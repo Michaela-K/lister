@@ -1,5 +1,5 @@
 //provide the actions to update the state, causing the component to render.
-import React, {useReducer } from "react";
+import {useReducer } from "react";
 
 export const ACTIONS = {
   TOGGLE_TODO_MODAL: "TOGGLE_TODO_MODAL",

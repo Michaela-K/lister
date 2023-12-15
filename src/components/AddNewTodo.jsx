@@ -4,7 +4,7 @@ import TodoForm from "./TodoForm";
 import { TodoContext } from "../context";
 import {calendarItems} from '../constants'
 import { db } from "../firebase";
-import { addDoc, collection, doc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import moment from "moment";
 import randomcolor from "randomcolor";
 

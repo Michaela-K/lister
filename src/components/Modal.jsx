@@ -1,5 +1,5 @@
-import React, {useRef, useState} from 'react'
-import { useTransition, useSpring, animated } from 'react-spring'
+import React, {useRef} from 'react'
+import {useSpring, animated } from 'react-spring'
 
 
 // used whenever a modal is needed

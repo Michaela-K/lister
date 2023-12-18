@@ -2,7 +2,7 @@
 <h1 align="center"> Lister </h1>
 Lister was created to keep track of Todos in various pre set categories in the Calendar (Today, Next 7 Days and All Days)
 <br/>
-Users can log in and add their own Categories called Projects and add Todo's under. 
+Users can also log in and add their own Categories called "Projects" and add Todo's undder those categories. 
 <br />
 
 <h3 align="center">
@@ -33,7 +33,7 @@ Users can log in and add their own Categories called Projects and add Todo's und
 <!-- ABOUT THE PROJECT -->
 ## About the Project <a id="about"></a>
 
-![BookMark Demo](public/BookMark-Demo.gif)
+![Lister Demo](public/lister-demo-GIF.gif)
 
 ### Built With 
 
@@ -41,6 +41,9 @@ Users can log in and add their own Categories called Projects and add Todo's und
 - React
 - JavaScript
 - CSS
+- Moment
+- Date-fns
+- Material UI
 
 <p align="right"><a href="#readme-top">back to top</a></p>
 
@@ -76,7 +79,8 @@ Users can log in and add their own Categories called Projects and add Todo's und
     ```sh
     REACT_APP_FIREBASE_API_KEY=your_api_key
     REACT_APP_FIREBASE_AUTH_DOMAIN=your_auth_domain
-    REACT_APP_FIREBASE_PROJECT_ID=your_project_id      REACT_APP_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+    REACT_APP_FIREBASE_PROJECT_ID=your_project_id      
+    REACT_APP_FIREBASE_STORAGE_BUCKET=your_storage_bucket
     REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
     REACT_APP_FIREBASE_APP_ID=your_app_id
     ```
@@ -99,16 +103,16 @@ Users can log in and add their own Categories called Projects and add Todo's und
 7. Start the app
    ```sh
    npm start
-   Visit `http://localhost:3000/`
+   Visit http://localhost:3000/
    ```
 <p align="right"><a href="#readme-top">back to top</a></p>
 
 
 ## Features <a id="features"></a>
-- [ ] Host project (Work in Progress)
-- [x] Register user
+- [ ] Host the project (Work in Progress)
+- [x] Register user in firebase
 - [x] Sign In / Sign Out User
-- [x] Add New Todo (day, time, project)
+- [x] Add New Todo (date, time, project category)
 - [x] Edit todo
 - [x] Delete todo
 - [x] Add a Project

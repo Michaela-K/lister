@@ -1,6 +1,6 @@
 {
-  "hompage":" https://Michaela-K/github.io/to_do",
-  "name": "to_do",
+  "hompage":"https://Michaela-K/github.io/lister",
+  "name": "lister",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

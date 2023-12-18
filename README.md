@@ -6,7 +6,7 @@ Users can also log in and add their own Categories called "Projects" and add Tod
 <br />
 
 <h3 align="center">
-  <a href=""> Live Demo </a> | <a href="https://github.com/Michaela-K/to_do/issues"> Report a Bug </a>
+  <a href="https://Michaela-K/github.io/lister"> Live Demo </a> | <a href="https://github.com/Michaela-K/lister/issues"> Report a Bug </a>
 </h3>
 
 <!-- TABLE OF CONTENTS -->
@@ -55,11 +55,11 @@ Users can also log in and add their own Categories called "Projects" and add Tod
 
 1. Clone the repo
    ```sh
-   git clone git@github.com:Michaela-K/to_do.git
+   git clone git@github.com:Michaela-K/lister.git
    ```
 2. Install NPM packages in the root directory
    ```sh
-   cd to_do
+   cd lister
    npm install
    ```
 3. Create a Firebase Project

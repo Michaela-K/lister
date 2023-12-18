@@ -6,7 +6,7 @@ Users can also log in and add their own Categories called "Projects" and add Tod
 <br />
 
 <h3 align="center">
-  <a href=""> *DEMO (WIP)*</a> | <a href="https://github.com/Michaela-K/to_do/issues">* Report a Bug *</a>
+  <a href=""> Live Demo </a> | <a href="https://github.com/Michaela-K/to_do/issues"> Report a Bug </a>
 </h3>
 
 <!-- TABLE OF CONTENTS -->
@@ -104,6 +104,12 @@ Users can also log in and add their own Categories called "Projects" and add Tod
    ```sh
    npm start
    Visit http://localhost:3000/
+   ```
+
+8. Log In with the credentials below
+   ```sh
+   Email: abc@test.com
+   Password: password
    ```
 <p align="right"><a href="#readme-top">back to top</a></p>
 

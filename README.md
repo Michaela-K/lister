@@ -6,7 +6,7 @@ Users can also log in and add their own Categories called "Projects" and add Tod
 <br />
 
 <h3 align="center">
-  <a href="https://Michaela-K/github.io/lister"> Live Demo </a> | <a href="https://github.com/Michaela-K/lister/issues"> Report a Bug </a>
+  <a href="http://Michaela-K/github.io/lister"> Live Demo </a> | <a href="https://github.com/Michaela-K/lister/issues"> Report a Bug </a>
 </h3>
 
 <!-- TABLE OF CONTENTS -->
